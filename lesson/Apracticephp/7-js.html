@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+</head>
+<body>
+<form name="myForm" onsubmit="click_name()"  action="7-js.html" method="post">
+名字: <input type="text" name="fname">
+<input type="submit" value="提交">
+</form>
+<hr />
+<p>请输入1到10之间的数字</p>
+<input type="text" id="fname" />
+<button type="button" onclick="click_sub()">提交</button>
+<hr />
+<form action="7-js.html">
+<input type="text"  id="fname" required />
+ <input type="submit" value="提交" />
+</form>
+<script>
+function click_name() {
+    // document.froms 返回对文档所有form对象的引用
+    // document.forms[].property 返回当前页面所有表单的数组组合
+    var x = document.forms["myForm"]["fname"].value;
+    if (x == null || x == "") {
+        alert("需要输入名字。");
+        return false;
+    }
+}
+
+function  click_sub(){
+var x =document.getElementById('fname').value;
+
+ if(isNaN(x)||x<0||x>10){
+    alert('输入错误');
+ }else{
+    alert('输入正确');
+ }
+
+}
+var a = 'abcddc';
+var n = a.lastIndexOf('c');
+alert(n);
+</script>
+
+</body>
+</html>

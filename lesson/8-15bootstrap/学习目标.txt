@@ -1,0 +1,8 @@
+1 深刻烦人理解bootstrap，包含那些内容
+2，学会bootstrap的是栅格系统
+3，可以使用bootstrap快速的搭建网页
+
+---bootstrap
+1，全局的css样式 - bootstrap.css
+2，组件--一些代码块
+js插件-----bootstrap

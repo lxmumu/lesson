@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src = 'jquery-3.2.1.min.js'></script>
+    </head>
+    <body>
+    <p>我是p标签</p>
+        <p id="p_id">我是标签2</p>
+    <script>
+      //文档中必须依据加载的jquery的js，才能正常使用jquery的各种方法
+      //(选择器(css选择器的写法)).处理方法
+    //$('p').innerHTML = 'aaa';//错误的
+
+    $('p').html('some text and markup');
+    $('p').text('some text');
+   //通过id选中
+    $('#p_id').text('some text');
+//事件
+    $('p').click(function(){
+        alert('message');
+    });
+   $('p').mousemove(function() {
+      //改变内容
+      // this.innerHTML='aaaaa';原始写法
+      $(this).html('aaaaaa');//jquery写法
+   });
+
+
+    //样式
+    $('p').css('background','orange');//单个样式
+    //多个样式
+    $('p').css({
+        fontSize:'30px',
+        color:'gray',
+    });
+    </script>
+    </body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>日历</title>
+        <style>
+            body{
+                margin: 0;
+                box-sizing: border-box;
+            }
+            .container{
+                  width:400px;
+                  height:600px;
+                  /* border: solid red 1px; */
+                  margin:0 auto;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+            }
+            .content{
+                width:200px;
+                height:350px;
+                /* border:solid red 1px; */
+                background-color: pink;
+            }
+            button{
+                position: relative;
+                width:50px;
+                height:50px;
+                margin-left: 10px;
+                background-color:gray;
+                /* display:block; */
+            }
+            button{
+                background-color:wheat;
+                color: red;
+            }
+            .sp_1{
+                  margin-left: 70px;
+            }
+            .sp_2{
+                margin-left: 45px;
+            }
+
+        </style>
+    </head>
+    <body>
+    <div class="container">
+    <div  class="content" id="Content">
+         <p>
+         <button onmouseout="move_fun(this)">1 JAY</button>
+         <button onmouseout="move_fun(this)">2 FER</button>
+         <button  onmouseout="move_fun(this)">3 MAR</button>
+         </p>
+         <p>
+         <button onmouseout="move_fun(this)" >4 APR</button>
+         <button  onmouseout="move_fun(this)" >5 MAR</button>
+         <button onmouseout="move_fun(this)" >6 JUN</button>
+         </p>
+        <p>
+         <button onmouseout="move_fun(this)"  >7 JUL</button>
+         <button onmouseout="move_fun(this)" > 8 AUG</button>
+         <button onmouseout="move_fun(this)"  >9 SEP</button>
+         </p>
+         <p>
+         <button onmouseout="move_fun(this)"  >10 OCT</button>
+         <button onmouseout="move_fun(this)"  >11 NOV</button>
+         <button onmouseout="move_fun(this)" >12 DEC</button>
+         </p>
+          <p id="p_id"></p>
+    </div>
+    </div>
+    <script>
+
+ function move_fun(element){
+    element.style.background='wheat';
+ }
+
+
+
+ var sp = document.getElementById('p_id');
+ var content=['一月生活,好好学习！！','2月生活,天天向上！！','3月生活,我要减肥！！','4月生活,钱钱钱钱！！','5月生活瘦瘦瘦瘦','6月生活,六世轮回！！','7月生活,七星高照！！','8月生活,八仙过海！！','9月生活,开学季节！！','10月生活,国庆节！！','11月生活,冬天到了！','12月生活,cats loving tree！！'];
+  var button = document.getElementsByTagName('button');
+  for(var i =0;i<button.length;i++){
+    //把循环放入其中
+     button[i].index =i;
+    button[i].onclick=function(){
+        // this.style.color='green';
+        this.style.background='white';
+        // this.index就是获取当前对象的index属性
+      sp.innerHTML= content[this.index];
+    }
+  }
+
+    </script>
+    </body>
+</html>
+
+
+

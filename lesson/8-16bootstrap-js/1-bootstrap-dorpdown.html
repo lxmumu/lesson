@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+            <title>
+                下拉菜单
+            </title>
+            <link href="css/bootstrap.min.css" rel="stylesheet"/>
+            <script src="jquery-3.2.1.min.js">
+            </script>
+            <script src="js/bootstrap.min.js">
+            </script>
+        </meta>
+    </head>
+    <body>
+        <div class="dropdown ">
+            <button class="btn btn-default" data-toggle="dropdown">     下拉菜单
+            </button>
+            <ul class="dropdown-menu">
+                <li>
+                   <a href="">列表1</a>
+                </li>
+                <li>
+                   <a href="">列表2</a>
+                </li>
+                <li>
+                   <a href="">列表3</a>
+                </li>
+                <li>
+                   <a href="">列表4</a>
+                </li>
+            </ul>
+        </div>
+            <script>
+            //事件-添加到dropdown-menu的父元素上
+             $('.dropdown').on('show.bs.dropdown',function(event){
+             alert('message');
+             });
+            </script>
+
+    </body>
+</html>

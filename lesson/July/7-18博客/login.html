@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+
+        <style>
+            body{
+                background-color:pink;
+                width:500px;
+                margin:0 auto;
+            }
+        </style>
+    </head>
+    <body>
+
+    <!-- 添加action=login的目的：定义html页面请求的行为（登录或者注册） -->
+    <!-- get请求： 就是将数据追加到url中，传递给服务器 -->
+<!-- 追加的方式：url?id=idvalue&id2=id2value;-->
+    <form action="admin.php?action=login" method="post">
+    <!-- 第二种方式 -->
+        <!-- <input type="hidde" name="action" value="login" /> -->
+        用户：<input type="text" name="user"  /><br />
+        密码：<input type="password" name="pwd" /><br />
+        <input type="submit" value="登录" />
+
+    </form>
+
+        <!-- <button name="subject">注册</button> -->
+
+    </body>
+</html>

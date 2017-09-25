@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>jquery效果</title>
+        <script src = 'jquery-3.2.1.min.js'> </script>
+        <style>
+            div{
+                width: 200px;
+                height: 200px;
+                background:pink;
+            }
+
+        </style>
+    </head>
+    <body>
+    <button class="btn-h">隐藏</button>
+    <button class='btn-s'>显示</button>
+    <button class="btn-t">开关</button>
+
+   <button class="btn_fadein">隐</button>
+    <button class='btn_fadeout'>显</button>
+    <button class="btn_fadetoggle">开</button>
+     <button class="btn_fadeto">关</button>
+     <button class="btn_animate">动画</button>
+    <button class="btn_l">链式</button>
+
+    <div>内容</div>
+    <h1 id="add">adferferferfgv</h1>
+    <script>
+        $('.btn-h').click(function(event){
+            // hide()第一个参数：速度（slow，fast 毫秒）第二个参数回调函数（动画执行完回调）
+            $('div').hide('slow', function() {
+                 alert('div隐藏');
+            });
+             // 参数不填也可以
+            // $('div').hide();
+        });
+
+        $('.btn-s').click(function(event){
+            // show()第一个参数：速度（slow，fast 毫秒），第二个参数回调函数（动画执行完回调）
+            $('div').show('slow', function() {
+                 alert('div显示');
+            });
+        });
+
+         $('.btn-t').click(function(event){
+            // toggle()第一个参数：速度（slow，fast 毫秒），第二个参数回调函数（动画执行完回调）
+            $('div').toggle();
+        });
+
+         $('.btn_fadein').click(function(event) {
+               $('div').fadeIn('fast', function() {
+
+               });
+         });
+        $('.btn_fadeout').click(function(event) {
+                $('div').fadeOut('fast', function() {
+
+               });
+         });
+         $('.btn_fadetoggle').click(function(event) {
+                $('div').fadeToggle('fast', function() {
+
+               });
+         });
+        $('.btn_fadeto').click(function(event) {
+                $('div').fadeTo('fast', 0.5,function() {
+
+               });
+         });
+
+         $('.btn_animate').click(function(event) {
+            $('div').animate({
+                left:'300px',
+                width:'500px',
+                // heght:'500px',
+                // height:'toggle',
+                height:'show',
+                 borderRadius:'100px',
+            });
+         });
+
+         //链式操作
+         $('.btn_l').click(function(event) {
+           $('div').css('background','yellow').slideUp('fast').slideDown('slow');
+           });
+
+         //添加元素
+         //html
+         var h ='<h1>我是新的标题</h1>';
+         //js原生
+         var js_h = document.createElement('h1');
+         js_h.innerHTML='我是js标题';
+         //jquery
+         var jquery_h = $('<h1></h1>').text('jquery标题');
+
+         $('#add').click(function(event) {
+           $(this).append(h,js_h,jquery_h);
+         });
+
+         //     $('#add').click(function(event) {
+         // $(this).remove();
+         // });
+
+
+    </script>
+    </body>
+</html>

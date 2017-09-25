@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>tab</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet"/>
+        <script src="jquery-3.2.1.min.js"></script>
+        <script src="js/bootstrap.min.js"> </script>
+    </head>
+    <body>
+    <div>
+
+  <!-- Nav tabs -->
+   <ul class="nav nav-pills" role="tablist">
+  <!-- <ul class="nav nav-tabs" role="tablist"> -->
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="">Home</a></li>
+    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="">Profile</a></li>
+    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="">Messages</a></li>
+    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="">Settings</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <!-- fade:tab切换的动画 -->
+  <!-- active：默认计划的tab -->
+  <!-- tab内容需要包含在 tab-content 容器中 -->
+  <div class="tab-content">
+    <!-- fade in active -->
+    <div role="tabpanel" class="tab-pane fade in active" id="home">我是home</div>
+    <div role="tabpanel" class="tab-pane fade" id="profile">我是profile</div>
+    <div role="tabpanel" class="tab-pane fade" id="messages">我是messages</div>
+    <div role="tabpanel" class="tab-pane fade" id="settings">我是setting</div>
+  </div>
+
+</div>
+<script>
+//使用啊标签，调用tab（‘show’）方法，切换tab
+    $('.nav a').click(function (e) {
+      e.preventDefault()
+      $(this).tab('show')
+    });
+    $('a').on('shown.bs.tab', function (e) {
+     console.log(e.target); // newly activated tab
+     console.log(e.relatedTarget); // previous active tab
+})
+</script>
+    </body>
+</html>
