@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>文章列表页_ecshop模块布局图_ecshop模板堂</title>
+<meta name="Keywords" content="ecshop模块布局图_各个页面模块布局设置_ecshop模板堂_ecshop教程" />
+<meta name="Description" content="ecshop模块布局图_各个页面模块布局设置_ecshop模板堂出品" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="jquery.js"></script>
+<SCRIPT LANGUAGE="JavaScript">
+function b(){
+	h = $(window).height();
+	t = $(document).scrollTop();
+	if(t > h){
+		$('#gotop').show();
+	}else{
+		$('#gotop').hide();
+	}
+}
+$(document).ready(function(e) {
+	b();
+	$('#gotop').click(function(){
+		$(document).scrollTop(0);	
+	})
+});
+
+$(window).scroll(function(e){
+	b();		
+})
+</SCRIPT>
+</head>
+<body>
+<div id="tbox">
+<a id="gotop" href="javascript:void(0)"></a>
+</div>
+<div class="block">
+<img src="article_cat.jpg" name="img" border="0" usemap="#imgMap" id="img" />
+<map name="imgMap" id="imgMap"><area shape="rect" coords="4,168,201,252" href="#a" alt="A" />
+<area shape="rect" coords="4,262,198,634" href="#b" alt="B" />
+<area shape="rect" coords="207,169,953,381" href="#c" alt="C" />
+<area shape="rect" coords="205,387,949,421" href="#d" alt="D" />
+</map>
+<div class="blank" style="height:100px;"></div>
+<a name=a></a>
+<h1>A.购物车</h1>
+<p>1,设置方法</p>
+<ul>
+程序自动读取购物车的商品数量
+<br/>
+</ul>
+<p>2,代码相关</p>
+cart.lbi 中
+<textarea name="" rows="" cols="">
+{insert_scripts files='transport.js'}
+<div class="cart" id="ECS_CARTINFO">
+ {insert name='cart_info'}
+</div>
+<div class="blank5"></div>
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+   /*购物车*/
+   .cart{background:url(images/catBg.gif) no-repeat left top; padding:15px 10px 15px 50px;
+   color:#006bcd; height:50px;  _padding:12px 10px 15px 50px;
+   }
+   .cart a{color:#006bcd; text-decoration:none;}
+   .cart a:hover{color:#006bcd; text-decoration:underline;}
+</textarea>
+<a name=b></a>
+<h1>B.商品分类树</h1>
+<p>1,设置方法</p>
+<ul>
+可以在后台<strong>商店管理-商品分类</strong>里修改<br/>
+详细教程：http://www.ecmoban.com/article-1688.html
+</ul>
+<p>2,代码相关</p>
+category_tree.lbi 中
+<textarea name="" rows="" cols="">
+<div class="box">
+ <div class="box_1">
+  <div id="category_tree">
+    <!--{foreach from=$categories item=cat}-->
+     <dl>
+     <dt><a href="{$cat.url}">{$cat.name|escape:html}</a></dt>
+     <!--{foreach from=$cat.cat_id item=child}-->
+     <dd><a href="{$child.url}">{$child.name|escape:html}</a></dd>
+       <!--{foreach from=$child.cat_id item=childer}-->
+       <dd>&nbsp;&nbsp;<a href="{$childer.url}">{$childer.name|escape:html}</a></dd>
+       <!--{/foreach}-->
+     <!--{/foreach}-->
+       
+       </dl>
+    <!--{/foreach}--> 
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+</textarea>
+<a name=c></a>
+<h1>C.文章列表</h1>
+<p>1,设置方法</p>
+<ul>
+<p>自动读取后台<strong>文章列表</strong></p>
+</ul>
+<p>2,代码相关</p>
+article.dwt 中
+<textarea name="" rows="" cols="">
+<div class="boxCenterList">
+          <form action="{$search_url}" name="search_form" method="post" class="article_search">
+        <input name="keywords" type="text" id="requirement" value="{$search_value}" class="inputBg" />
+        <input name="id" type="hidden" value="{$cat_id}" />
+        <input name="cur_url" id="cur_url" type="hidden" value="" />
+        <input type="submit" value="{$lang.button_search}" class="bnt_blue_1" />
+      </form>
+      <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+      <tr>
+        <th bgcolor="#ffffff">{$lang.article_title}</th>
+          <th bgcolor="#ffffff">{$lang.article_author}</th>
+          <th bgcolor="#ffffff">{$lang.article_add_time}</th>
+        </tr>
+      <!-- {foreach from=$artciles_list item=article} -->
+      <tr>
+        <td bgcolor="#ffffff"><a href="{$article.url}" title="{$article.title|escape:html}" class="f6">{$article.short_title}</a></td>
+          <td bgcolor="#ffffff">{$article.author}</td>
+          <td bgcolor="#ffffff" align="center">{$article.add_time}</td>
+        </tr>
+      <!-- {/foreach} -->
+    </table>
+    </div>
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+  .boxCenterList{padding:8px;}
+   
+  </textarea>
+<a name=d></a>
+<h1>D.页码区</h1>
+<p>1,设置方法</p>
+<ul>
+程序自带的分页效果,样式有两种,可以在后台 <strong>商店设置-显示设置</strong>里选择<br/>
+<img src="category2.jpg" width="343" height="101" border="0" /><br/>
+<img src="category3.jpg" border="0" />
+</ul>
+<p>2,代码相关</p>
+pages.lbi 中
+<textarea name="" rows="" cols="">
+<!--翻页 start-->
+<form name="selectPageForm" action="{$smarty.server.PHP_SELF}" method="get">
+<!-- {if $pager.styleid eq 0 } -->
+<div id="pager">
+  {$lang.pager_1}{$pager.record_count}{$lang.pager_2}{$lang.pager_3}{$pager.page_count}{$lang.pager_4} <span> <a href="{$pager.page_first}">{$lang.page_first}</a> <a href="{$pager.page_prev}">{$lang.page_prev}</a> <a href="{$pager.page_next}">{$lang.page_next}</a> <a href="{$pager.page_last}">{$lang.page_last}</a> </span>
+    <!--{foreach from=$pager.search key=key item=item}-->
+      {if $key eq 'keywords'}
+          <input type="hidden" name="{$key}" value="{$item|escape:decode_url}" />
+        {else}
+          <input type="hidden" name="{$key}" value="{$item}" />
+      {/if}
+    <!--{/foreach}-->
+    <select name="page" id="page" onchange="selectPage(this)">
+    {html_options options=$pager.array selected=$pager.page}
+    </select>
+</div>
+<!--{else}-->
+
+<!--翻页 start-->
+ <div id="pager" class="pagebar">
+  <span class="f_l f6" style="margin-right:10px;">{$lang.pager_1}<b>{$pager.record_count}</b> {$lang.pager_2}</span>
+  <!-- {if $pager.page_first} --><a href="{$pager.page_first}">{$lang.page_first} ...</a><!-- {/if} -->
+  <!-- {if $pager.page_prev} --><a class="prev" href="{$pager.page_prev}">{$lang.page_prev}</a><!-- {/if} -->
+  <!-- {if $pager.page_count neq 1} -->
+    <!--{foreach from=$pager.page_number key=key item=item}-->
+      <!-- {if $pager.page eq $key} -->
+      <span class="page_now">{$key}</span>
+      <!-- {else} -->
+      <a href="{$item}">[{$key}]</a>
+      <!-- {/if} -->
+    <!--{/foreach}-->
+  <!-- {/if} -->
+
+  <!-- {if $pager.page_next} --><a class="next" href="{$pager.page_next}">{$lang.page_next}</a><!-- {/if} -->
+  <!-- {if $pager.page_last} --><a class="last" href="{$pager.page_last}">...{$lang.page_last}</a><!-- {/if} -->
+  <!-- {if $pager.page_kbd} -->
+    <!--{foreach from=$pager.search key=key item=item}-->
+      {if $key eq 'keywords'}
+          <input type="hidden" name="{$key}" value="{$item|escape:decode_url}" />
+        {else}
+          <input type="hidden" name="{$key}" value="{$item}" />
+      {/if}
+    <!--{/foreach}-->
+    <kbd style="float:left; margin-left:8px; position:relative; bottom:3px;"><input type="text" name="page" onkeydown="if(event.keyCode==13)selectPage(this)" size="3" class="B_blue" /></kbd>
+    <!-- {/if} -->
+</div>
+<!--翻页 END-->
+
+<!-- {/if} -->
+</form>
+<script type="Text/Javascript" language="JavaScript">
+<!--
+{literal}
+function selectPage(sel)
+{
+  sel.form.submit();
+}
+{/literal}
+//-->
+</script>
+
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+   /*翻页*/
+   .pagebar{height:20px; float:right;}
+   .pagebar img{position:relative; top:2px;}
+   .pagebar a{display:block; float:left; margin:0 2px; color:#0066cc; text-decoration:none;}
+   .pagebar a:hover{color:#ff5a6a; text-decoration:none;}
+   .pagebar .page_now{display:block; float:left; margin:0 5px; color:#ff5a6a; font-weight:bold; background:#fff;}
+   #pager a{color:#0066cc; text-decoration:none;}
+</textarea>
+</div>
+</body>
+</html>

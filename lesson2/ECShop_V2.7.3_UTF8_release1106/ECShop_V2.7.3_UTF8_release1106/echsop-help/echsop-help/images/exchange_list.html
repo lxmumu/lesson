@@ -1,0 +1,398 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>积分商城列表页_ecshop模块布局图_ecshop模板堂</title>
+<meta name="Keywords" content="ecshop模块布局图_各个页面模块布局设置_ecshop模板堂_ecshop教程" />
+<meta name="Description" content="ecshop模块布局图_各个页面模块布局设置_ecshop模板堂出品" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="jquery.js"></script>
+<SCRIPT LANGUAGE="JavaScript">
+function b(){
+	h = $(window).height();
+	t = $(document).scrollTop();
+	if(t > h){
+		$('#gotop').show();
+	}else{
+		$('#gotop').hide();
+	}
+}
+$(document).ready(function(e) {
+	b();
+	$('#gotop').click(function(){
+		$(document).scrollTop(0);	
+	})
+});
+
+$(window).scroll(function(e){
+	b();		
+})
+</SCRIPT>
+</head>
+<body>
+<div id="tbox">
+<a id="gotop" href="javascript:void(0)"></a>
+</div>
+<div class="block">
+<img src="exchange_list.jpg" name="img" border="0" usemap="#imgMap" />
+<map name="imgMap" id="imgMap">
+<area shape="rect" coords="16,169,209,252" href="#a" alt="a" />
+<area shape="rect" coords="19,267,215,619" href="#b" alt="b" />
+<area shape="rect" coords="227,168,974,394" href="#c" alt="c" />
+<area shape="rect" coords="223,408,974,618" href="#d" alt="d" /><area shape="rect" coords="224,625,977,669" href="#e" alt="e" />
+<area shape="rect" coords="213,1157,948,1183" href="#h" alt="h" />
+</map>
+<div class="blank" style="height:100px;"></div>
+<a name=a></a>
+<h1>A.购物车</h1>
+<p>1,设置方法</p>
+<ul>
+程序自动读取购物车的商品数量
+<br/>
+</ul>
+<p>2,代码相关</p>
+cart.lbi 中
+<textarea name="" rows="" cols="">
+{insert_scripts files='transport.js'}
+<div class="cart" id="ECS_CARTINFO">
+ {insert name='cart_info'}
+</div>
+<div class="blank5"></div>
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+   /*购物车*/
+   .cart{background:url(images/catBg.gif) no-repeat left top; padding:15px 10px 15px 50px;
+   color:#006bcd; height:50px;  _padding:12px 10px 15px 50px;
+   }
+   .cart a{color:#006bcd; text-decoration:none;}
+   .cart a:hover{color:#006bcd; text-decoration:underline;}
+</textarea>
+<a name=b></a>
+<h1>B.商品分类树</h1>
+<p>1,设置方法</p>
+<ul>
+可以在后台<strong>商店管理-商品分类</strong>里修改<br/>
+详细教程：http://www.ecmoban.com/article-1688.html
+</ul>
+<p>2,代码相关</p>
+category_tree.lbi 中
+<textarea name="" rows="" cols="">
+<div class="box">
+ <div class="box_1">
+  <div id="category_tree">
+    <!--{foreach from=$categories item=cat}-->
+     <dl>
+     <dt><a href="{$cat.url}">{$cat.name|escape:html}</a></dt>
+     <!--{foreach from=$cat.cat_id item=child}-->
+     <dd><a href="{$child.url}">{$child.name|escape:html}</a></dd>
+       <!--{foreach from=$child.cat_id item=childer}-->
+       <dd>&nbsp;&nbsp;<a href="{$childer.url}">{$childer.name|escape:html}</a></dd>
+       <!--{/foreach}-->
+     <!--{/foreach}-->
+       
+       </dl>
+    <!--{/foreach}--> 
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+ /*商品分类*/
+   #category_tree{border:4px solid #f1faff; background-color:#fff;}
+   #category_tree dl{margin:6px;}
+   #category_tree dt{background:url(images/lineBg.gif) repeat-x left bottom;
+   color:#3f3f3f;  padding:2px 0 3px 12px;
+   }
+   #category_tree dt a{background:url(images/bg.gif) no-repeat 0 -69px;
+   color:#3f3f3f; padding-left:15px; text-decoration:none;
+   }
+   #category_tree dd{padding:3px 0 3px 10px;}
+   #category_tree dd a{color:#404040; text-decoration:none;}
+   #category_tree dd a:hover{color:#ff6600; text-decoration:none;}
+</textarea>
+<a name=c></a>
+<h1>C.热卖商品区</h1>
+<p>1,设置方法</p>
+<ul>
+在后台 <strong>促销管理 - 积分商城商品</strong> 里加商品的时候勾选“热销”<br/>
+<strong>
+<img src="exchange1.jpg" width="712" height="341" /><br/>
+</strong>
+</ul>
+<p>2,代码相关</p>
+exchange_hot.lbi 中
+<textarea name="" rows="" cols="">
+<!-- {if $hot_goods}-->
+<div class="box">
+  <div class="box_2 centerPadd">
+    <div class="itemTit Hot" id="itemHot"></div>
+    <div id="show_hot_area" class="clearfix goodsBox">
+    <!--{foreach from=$hot_goods item=goods}-->
+      <div class="goodsItem">
+        <span class="hot"></span>
+        <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="goodsimg" /></a><br />
+        <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a></p>
+        {$lang.exchange_integral}<font class="f1">{$goods.exchange_integral}</font>
+      </div>
+    <!--{/foreach}-->
+    </div>
+  </div>
+</div>
+<div class="blank5"></div>
+<!-- {/if} -->
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+    /*精品推荐，新品上市，热卖商品*/
+   .centerPadd{padding:5px 8px 8px 8px; overflow:hidden;}
+   .itemTit{height:30px; background:url(images/bg.gif) no-repeat 0px -195px; padding-left:190px; text-align:right;
+   /*margin-bottom:-3px; _margin-bottom:-2px;*/
+   }
+   .itemTit.Hot{background:url(images/bg.gif) no-repeat 0px -256px;}
+    .centerPadd .goodsBox{border:1px solid #d6ecff; background:#fff; padding:12px 0px 0px 17px; *padding:12px 0px 0px 17px;
+   _padding:12px 0px 0px 0px;}
+   .centerPadd .goodsBox .more{text-align:right; clear:both; margin:0 8px 8px 0;}
+       /*单个商品*/
+       .goodsItem{width:110px; float:left; position:relative; overflow:hidden; margin:0px 14px 15px 14px;}
+       .goodsItem .goodsimg{width:100px; height:100px; border:4px solid #eef8ff; margin-bottom:4px;}
+       .goodsItem img{width:52px; height:17px;}
+       .goodsItem p{text-align:left; color:#3f3f3f;}
+       .goodsItem p a{color:#3f3f3f; text-decoration:none;}
+       .goodsItem p a:hover{color:#ff6600; text-decoration:none;}
+       .goodsItem span{width:40px; height:40px; position:absolute;left:0px; top:0px;}
+       .goodsItem span.best{background:url(images/bg.gif) no-repeat 0px -304px;}
+       .goodsItem span.news{background:url(images/bg.gif) no-repeat -75px -304px;}
+       .goodsItem span.hot{background:url(images/bg.gif) no-repeat -161px -304px;}
+
+</textarea>
+<a name=d></a>
+<h1>D.积分商城商品</h1>
+<p>1,设置方法</p>
+<ul>
+在后台 <strong>促销管理 - 积分商城商品</strong> 里添加商品即可
+</ul>
+<p>2,代码相关</p>
+exchange_list.lbi 中
+<textarea name="" rows="" cols="">
+<div class="box">
+  <div class="box_1">
+    <h3>
+      <span>{$lang.goods_list}</span>
+      <form method="GET" class="sort" name="listform">
+        {$lang.btn_display}：
+        <a href="javascript:;" onClick="javascript:display_mode('list')"><img src="images/display_mode_list<!-- {if $pager.display == 'list'} -->_act<!-- {/if} -->.gif" alt="{$lang.display.list}"></a>
+        <a href="javascript:;" onClick="javascript:display_mode('grid')"><img src="images/display_mode_grid<!-- {if $pager.display == 'grid'} -->_act<!-- {/if} -->.gif" alt="{$lang.display.grid}"></a>
+        <a href="javascript:;" onClick="javascript:display_mode('text')"><img src="images/display_mode_text<!-- {if $pager.display == 'text'} -->_act<!-- {/if} -->.gif" alt="{$lang.display.text}"></a>&nbsp;&nbsp;
+        <select name="sort" style="border:1px solid #ccc;">
+        {html_options options=$lang.exchange_sort selected=$pager.sort}
+        </select>
+        <select name="order" style="border:1px solid #ccc;">
+        {html_options options=$lang.order selected=$pager.order}
+        </select>
+        <input type="image" name="imageField" src="../images/bnt_go.gif" alt="go"/>
+        <input type="hidden" name="category" value="{$category}" />
+        <input type="hidden" name="display" value="{$pager.display}" id="display" />
+        <input type="hidden" name="integral_min" value="{$integral_min}" />
+        <input type="hidden" name="integral_max" value="{$integral_max}" />
+        <input type="hidden" name="page" value="{$pager.page}" />
+      </form>
+    </h3>
+
+    <form name="compareForm" method="post">
+    <!-- {if $pager.display == 'list'} -->
+      <div class="goodsList">
+      <!--{foreach name=goods_list from=$goods_list item=goods}-->
+        <ul class="clearfix bgcolor"<!--{if $smarty.foreach.goods_list.index mod 2 eq 0}-->id=""<!--{else}-->id="bgcolor"<!--{/if}-->>
+          <li class="thumb"><a href="{$goods.url}"><img src="{$goods.goods_thumb}" alt="{$goods.goods_name}" /></a></li>
+          <li class="goodsName">
+            <a href="{$goods.url}" class="f6">
+            <!-- {if $goods.goods_style_name} -->
+              {$goods.goods_style_name}<br />
+            <!-- {else} -->
+              {$goods.goods_name}<br />
+            <!-- {/if} -->
+            </a>
+            <!-- {if $goods.goods_brief} -->
+              {$lang.goods_brief}{$goods.goods_brief}<br />
+            <!-- {/if} -->
+          </li>
+          <li>
+            {$lang.exchange_integral}<font class="shop_s">{$goods.exchange_integral}</font>
+          </li>
+        </ul>
+      <!--{/foreach}-->
+      </div>
+
+    <!-- {elseif $pager.display == 'grid'} -->
+      <div class="centerPadd">
+        <div class="clearfix goodsBox" style="border:none;">
+        <!--{foreach from=$goods_list item=goods}-->
+          <!-- {if $goods.goods_id} -->
+            <div class="goodsItem">
+              <a href="{$goods.url}"><img src="{$goods.goods_thumb}" alt="{$goods.goods_name}" class="goodsimg" /></a><br />
+              <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.goods_name}</a></p>
+              {$lang.exchange_integral}<font class="shop_s">{$goods.exchange_integral}</font><br />
+            </div>
+          <!--{/if}-->
+        <!--{/foreach}-->
+        </div>
+      </div>
+
+    <!-- {elseif $pager.display == 'text'} -->
+      <div class="goodsList">
+      <!--{foreach from=$goods_list item=goods}-->
+        <ul class="clearfix bgcolor" <!--{if $smarty.foreach.goods_list.index mod 2 eq 0}-->id=""<!--{else}-->id="bgcolor"<!--{/if}-->>
+          <li class="goodsName">
+            <a href="{$goods.url}" class="f6 f5">
+            <!-- {if $goods.goods_style_name} -->
+              {$goods.goods_style_name}<br />
+            <!-- {else} -->
+              {$goods.goods_name}<br />
+            <!-- {/if} -->
+            </a>
+            <!-- {if $goods.goods_brief} -->
+              {$lang.goods_brief}{$goods.goods_brief}<br />
+            <!-- {/if} -->
+          </li>
+          <li>
+            {$lang.exchange_integral}<font class="shop_s">{$goods.exchange_integral}</font>
+          </li>
+        </ul>
+      <!--{/foreach}-->
+      </div>
+    <!-- {/if} -->
+    </form>
+
+  </div>
+</div>
+<div class="blank5"></div>
+<script type="text/javascript">
+  window.onload = function()
+  {
+    Compare.init();
+    fixpng();
+  }
+  var button_compare = '';
+</script>
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+   .centerPadd .goodsBox{border:1px solid #d6ecff; background:#fff; padding:12px 0px 0px 17px; *padding:12px 0px 0px 17px;
+   _padding:12px 0px 0px 0px;}
+   .centerPadd .goodsBox .more{text-align:right; clear:both; margin:0 8px 8px 0;}
+       /*单个商品*/
+       .goodsItem{width:110px; float:left; position:relative; overflow:hidden; margin:0px 14px 15px 14px;}
+       .goodsItem .goodsimg{width:100px; height:100px; border:4px solid #eef8ff; margin-bottom:4px;}
+       .goodsItem img{width:52px; height:17px;}
+       .goodsItem p{text-align:left; color:#3f3f3f;}
+       .goodsItem p a{color:#3f3f3f; text-decoration:none;}
+       .goodsItem p a:hover{color:#ff6600; text-decoration:none;}
+       .goodsItem span{width:40px; height:40px; position:absolute;left:0px; top:0px;}
+       .goodsItem span.best{background:url(images/bg.gif) no-repeat 0px -304px;}
+       .goodsItem span.news{background:url(images/bg.gif) no-repeat -75px -304px;}
+       .goodsItem span.hot{background:url(images/bg.gif) no-repeat -161px -304px;}
+        /*商品列表显示方式*/
+    .goodsList{ padding:10px 10px 0 10px;}
+    .goodsList ul{ margin-bottom:10px;}
+    .goodsList ul#bgcolor{background:#fbfbfb; border-top:1px dashed #e8e8e8; border-bottom:1px dashed #e8e8e8;}
+    .goodsList li{float:left; padding-top:8px;}
+    .goodsList li.thumb{width:80px; text-align:center;}
+    .goodsList li.thumb img{width:50px; height:50px; border:1px solid #ccc; padding:1px;}
+    .goodsList li.goodsName{width:290px; margin-right:10px;}
+    .goodsList li.action{float:right; margin-left:10px;}
+    .goodsList li.action a.abg{background:url(images/bg.gif) no-repeat 0px -735px; padding-left:18px; position:relative; bottom:5px;}
+</textarea>
+<a name=e></a>
+<h1>E.页码区</h1>
+<p>1,设置方法</p>
+<ul>
+程序自带的分页效果,样式有两种,可以在后台 <strong>商店设置-显示设置</strong>里选择<br/>
+<img src="category2.jpg" width="343" height="101" border="0" /><br/>
+<img src="category3.jpg" width="328" height="33" border="0" />
+</ul>
+<p>2,代码相关</p>
+pages.lbi 中
+<textarea name="" rows="" cols="">
+<!--翻页 start-->
+<form name="selectPageForm" action="{$smarty.server.PHP_SELF}" method="get">
+<!-- {if $pager.styleid eq 0 } -->
+<div id="pager">
+  {$lang.pager_1}{$pager.record_count}{$lang.pager_2}{$lang.pager_3}{$pager.page_count}{$lang.pager_4} <span> <a href="{$pager.page_first}">{$lang.page_first}</a> <a href="{$pager.page_prev}">{$lang.page_prev}</a> <a href="{$pager.page_next}">{$lang.page_next}</a> <a href="{$pager.page_last}">{$lang.page_last}</a> </span>
+    <!--{foreach from=$pager.search key=key item=item}-->
+      {if $key eq 'keywords'}
+          <input type="hidden" name="{$key}" value="{$item|escape:decode_url}" />
+        {else}
+          <input type="hidden" name="{$key}" value="{$item}" />
+      {/if}
+    <!--{/foreach}-->
+    <select name="page" id="page" onchange="selectPage(this)">
+    {html_options options=$pager.array selected=$pager.page}
+    </select>
+</div>
+<!--{else}-->
+
+<!--翻页 start-->
+ <div id="pager" class="pagebar">
+  <span class="f_l f6" style="margin-right:10px;">{$lang.pager_1}<b>{$pager.record_count}</b> {$lang.pager_2}</span>
+  <!-- {if $pager.page_first} --><a href="{$pager.page_first}">{$lang.page_first} ...</a><!-- {/if} -->
+  <!-- {if $pager.page_prev} --><a class="prev" href="{$pager.page_prev}">{$lang.page_prev}</a><!-- {/if} -->
+  <!-- {if $pager.page_count neq 1} -->
+    <!--{foreach from=$pager.page_number key=key item=item}-->
+      <!-- {if $pager.page eq $key} -->
+      <span class="page_now">{$key}</span>
+      <!-- {else} -->
+      <a href="{$item}">[{$key}]</a>
+      <!-- {/if} -->
+    <!--{/foreach}-->
+  <!-- {/if} -->
+
+  <!-- {if $pager.page_next} --><a class="next" href="{$pager.page_next}">{$lang.page_next}</a><!-- {/if} -->
+  <!-- {if $pager.page_last} --><a class="last" href="{$pager.page_last}">...{$lang.page_last}</a><!-- {/if} -->
+  <!-- {if $pager.page_kbd} -->
+    <!--{foreach from=$pager.search key=key item=item}-->
+      {if $key eq 'keywords'}
+          <input type="hidden" name="{$key}" value="{$item|escape:decode_url}" />
+        {else}
+          <input type="hidden" name="{$key}" value="{$item}" />
+      {/if}
+    <!--{/foreach}-->
+    <kbd style="float:left; margin-left:8px; position:relative; bottom:3px;"><input type="text" name="page" onkeydown="if(event.keyCode==13)selectPage(this)" size="3" class="B_blue" /></kbd>
+    <!-- {/if} -->
+</div>
+<!--翻页 END-->
+
+<!-- {/if} -->
+</form>
+<script type="Text/Javascript" language="JavaScript">
+<!--
+{literal}
+function selectPage(sel)
+{
+  sel.form.submit();
+}
+{/literal}
+//-->
+</script>
+
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+   /*翻页*/
+   .pagebar{height:20px; float:right;}
+   .pagebar img{position:relative; top:2px;}
+   .pagebar a{display:block; float:left; margin:0 2px; color:#0066cc; text-decoration:none;}
+   .pagebar a:hover{color:#ff5a6a; text-decoration:none;}
+   .pagebar .page_now{display:block; float:left; margin:0 5px; color:#ff5a6a; font-weight:bold; background:#fff;}
+   #pager a{color:#0066cc; text-decoration:none;}
+</textarea>
+</div>
+</body>
+</html>

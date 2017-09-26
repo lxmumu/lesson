@@ -1,0 +1,615 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>ECSHOP 模板结构说明 (适用版本v2.7.3)</title>
+<meta name="Keywords" content="ecshop在线手册,提供ecshop 2.7.3最新版程序说明,数据库说明,模板结构说明,常见问题,该手册由ecshop模板堂重制" />
+<meta name="Description" content="ecshop在线手册,提供ecshop 2.7.3最新版程序说明,数据库说明,模板结构说明,常见问题,该手册由ecshop模板堂重制" />
+<link href="style.css" rel="stylesheet" type="text/css" media="all" />
+</head>
+<body>
+<div class="menu">
+<h3>ECSHOP 模板结构说明 (适用版本v2.7.3)</h3>
+</div>
+<div class="content"><table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th width="180">名称</th>
+<th width="80">类型</th>
+<th>备注（作用或意义）</th>
+<th width="180">文件(目录)名可否更改</th>
+</tr>
+<tr>
+<td width="180">images</td>
+<td width="80">目录</td>
+<td>存放模板图片目录 </td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">library</td>
+<td width="80">目录</td>
+<td>存放模板库文件目录</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">screenshot.png </td>
+<td width="80">图片</td>
+<td>用于“后台管理 -> 模板管理 -> 模板选择”显示模板缩略图。</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">style.css</td>
+<td width="80">css样式表</td>
+<td>&nbsp;</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr style="background:#F1F1F1;">
+<td colspan="4">备注：模板文件共35(格式：.dwt)。 <br />
+提醒：<br />
+1,
+更改模板文件里面库文件的内容是无效的，页面刷新时，程序自动重新载入库文件内容到模板文件里(以库文件内容为准)。<br />
+2,
+模板内所有id值为 ECS_ 开头的都必须保留(和ajax相关)。<br />
+3, 非库文件内容不可放置到可编辑区域内，否则设置模板时，非库文件内容将被覆盖删除。<br /></td>
+</tr>
+<tr>
+<td width="180">activity.dwt</td>
+<td width="80">模板文件</td>
+<td>活动列表页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">article.dwt</td>
+<td width="80">模板文件</td>
+<td>文章内容页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">article_cat.dwt </td>
+<td width="80">模板文件</td>
+<td>文章列表页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">article_pro.dwt </td>
+<td width="80">模板文件</td>
+<td>系统文章页（如：“公司简介”、“版权信息“。）</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">auction_list.dwt </td>
+<td width="80">模板文件</td>
+<td>拍卖商品列表页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">auction.dwt </td>
+<td width="80">模板文件</td>
+<td>拍卖商品详情页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">brand.dwt</td>
+<td width="80">模板文件</td>
+<td>商品品牌页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">brand_list.dwt</td>
+<td width="80">模板文件</td>
+<td>品牌合集页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">catalog.dwt</td>
+<td width="80">模板文件</td>
+<td>所有分类页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">category.dwt</td>
+<td width="80">模板文件</td>
+<td>商品列表页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">compare.dwt</td>
+<td width="80">模板文件</td>
+<td>商品比较页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">exchange_goods.dwt</td>
+<td width="80">模板文件</td>
+<td>积分商城详情页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">exchange_list.dwt</td>
+<td width="80">模板文件</td>
+<td>积分商城列表页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">flow.dwt</td>
+<td width="80">模板文件</td>
+<td>购物车和购物流程页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">gallery.dwt</td>
+<td width="80">模板文件</td>
+<td>商品相册页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">goods.dwt</td>
+<td width="80">模板文件</td>
+<td>商品详情页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">group_buy_goods.dwt</td>
+<td width="80">模板文件</td>
+<td>团购商品详情页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">group_buy_list.dwt</td>
+<td width="80">模板文件</td>
+<td>团购商品列表页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">index.dwt</td>
+<td width="80">模板文件</td>
+<td>首页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">message.dwt</td>
+<td width="80">模板文件</td>
+<td>信息提示页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">message_board.dwt</td>
+<td width="80">模板文件</td>
+<td>留言板页面</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">myship.dwt</td>
+<td width="80">模板文件</td>
+<td>配送方式页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">package.dwt</td>
+<td width="80">模板文件</td>
+<td>超值礼包列表</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">package.dwt</td>
+<td width="80">模板文件</td>
+<td>超值礼包列表</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">pick_out.dwt</td>
+<td width="80">模板文件</td>
+<td>选购中心页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">receive.dwt</td>
+<td width="80">模板文件</td>
+<td>收货确认信息页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">respond.dwt</td>
+<td width="80">模板文件</td>
+<td>在线支付结果提示信息页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">search.dwt</td>
+<td width="80">模板文件</td>
+<td>商品搜索页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">snatch.dwt</td>
+<td width="80">模板文件</td>
+<td>夺宝奇兵页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">tag_cloud.dwt</td>
+<td width="80">模板文件</td>
+<td>标签云页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">topic.dwt</td>
+<td width="80">模板文件</td>
+<td>专题页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">user_clips.dwt</td>
+<td width="80">模板文件</td>
+<td>用户中心页 （包含：欢迎页，我的留言，我的标签，收藏商品，缺货登记列表，添加缺货登记。）</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">user_passport.dwt</td>
+<td width="80">模板文件</td>
+<td>用户安全页（包含：会员登录，会员注册，找回密码。）</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">user_transaction.dwt</td>
+<td width="80">模板文件</td>
+<td>用户中心页 （包含：个人资料，我的红包，添加红包，我的订单，订单详情，合并订单，订单状态，商品列表，费用总计，收货人信息，支付方式，其他信息，会员余额。）</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">wholesale_list.dwt</td>
+<td width="80">模板文件</td>
+<td>批发方案页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr style="background:#F1F1F1;">
+<td colspan="4">备注：库文件共57个 (格式 .lbi)<br />
+提醒：文件名尽量保存默认，否则在后台管理将无法管理库文件或不可预见错误。<br /></td>
+</tr>
+<tr>
+<td width="180">ad_position.lbi</td>
+<td width="80">库文件</td>
+<td>广告位</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">article_category_tree.lbi</td>
+<td width="80">库文件</td>
+<td>文章分类页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">auction.lbi</td>
+<td width="80">库文件</td>
+<td>拍卖商品列表</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">bought_goods.lbi</td>
+<td width="80">库文件</td>
+<td>购买过此商品的人购买过哪些商品</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">bought_note_guide.lbi</td>
+<td width="80">库文件</td>
+<td>购买历史列表 （ajax载入bought_notes.lbi库文件。）</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">bought_notes.lbi</td>
+<td width="80">库文件</td>
+<td>购买历史列表</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td width="180">brand_goods.lbi</td>
+<td width="80">库文件</td>
+<td>品牌的商品</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>brands.lbi</td>
+<td>库文件</td>
+<td>品牌专区</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>cart.lbi</td>
+<td>库文件</td>
+<td>购物车</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>cat_articles.lbi</td>
+<td width="80">库文件</td>
+<td>文章列表</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>cat_goods.lbi</td>
+<td width="80">库文件</td>
+<td>分类下的商品</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>category_tree.lbi</td>
+<td width="80">库文件</td>
+<td>商品分类树</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>categorys.lbi</td>
+<td width="80">库文件</td>
+<td>选购中心已选分类</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>comments.lbi</td>
+<td>库文件</td>
+<td>用户评论列表 （ajax载入comments_list.lbi库文件。）</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>comments_list.lbi</td>
+<td>库文件</td>
+<td>用户评论内容</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>consignee.lbi</td>
+<td width="80">库文件</td>
+<td>收货地址表单</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>email_list.lbi</td>
+<td width="80">库文件</td>
+<td>邮件订阅</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>exchange_hot.lbi</td>
+<td width="80">库文件</td>
+<td>积分商城热门商品</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>exchange_list.lbi</td>
+<td width="80">库文件</td>
+<td>积分商城商品列表</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>filter_attr.lbi</td>
+<td width="80">库文件</td>
+<td>属性筛选</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>goods_article.lbi</td>
+<td width="80">库文件</td>
+<td>相关文章</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>goods_attrlinked.lbi</td>
+<td width="80">库文件</td>
+<td>属性关联的商品</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>goods_fittings.lbi</td>
+<td>库文件</td>
+<td>相关配件</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>goods_gallery.lbi</td>
+<td>库文件</td>
+<td>商品相册</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>goods_list.lbi</td>
+<td width="80">库文件</td>
+<td>商品列表</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>goods_related.lbi</td>
+<td width="80">库文件</td>
+<td>相关商品</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>goods_tags.lbi</td>
+<td width="80">库文件</td>
+<td>商品标记</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>group_buy.lbi</td>
+<td>库文件</td>
+<td>首页团购商品</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>help.lbi</td>
+<td>库文件</td>
+<td>网店帮助</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>history.lbi</td>
+<td width="80">库文件</td>
+<td>商品浏览历史</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>index_ad.lbi</td>
+<td width="80">库文件</td>
+<td>首页主广告</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>invoice_query.lbi</td>
+<td width="80">库文件</td>
+<td>发货单查询</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>member.lbi</td>
+<td width="80">库文件</td>
+<td> 会员登录 (ajax载入member_info.lbi库文件。)</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>member_info.lbi</td>
+<td>库文件</td>
+<td>会员登录表单和登录成功以后用户账户信息</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>message_list.lbi</td>
+<td>库文件</td>
+<td>留言列表</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>myship.lbi</td>
+<td>库文件</td>
+<td>配送方式列表</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>new_articles.lbi</td>
+<td>库文件</td>
+<td>最新文章</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>online.lbi</td>
+<td>库文件</td>
+<td>（目前没发现任何作用）</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>order_query.lbi</td>
+<td>库文件</td>
+<td>订单查询模块</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>order_total.lbi</td>
+<td width="80">库文件</td>
+<td>订单费用总计</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>page_footer.lbi</td>
+<td width="80">库文件</td>
+<td>页面脚部</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>page_header.lbi</td>
+<td width="80">库文件</td>
+<td>页面顶部</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>pages.lbi</td>
+<td>库文件</td>
+<td>列表分页</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>price_grade.lbi</td>
+<td>库文件</td>
+<td>价格区间</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>promotion_info.lbi</td>
+<td>促销信息</td>
+<td>价格区间</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>recommend_best.lbi</td>
+<td>库文件</td>
+<td>精品推荐</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>recommend_hot.lbi</td>
+<td width="80">库文件</td>
+<td>热卖商品</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>recommend_new.lbi</td>
+<td width="80">库文件</td>
+<td>新品推荐</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>recommend_promotion.lbi</td>
+<td width="80">库文件</td>
+<td>促销商品</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>relatetag.lbi</td>
+<td width="80">库文件</td>
+<td>相关tag的文件（和ucenter有关系）</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>snatch.lbi</td>
+<td>库文件</td>
+<td>夺宝奇兵出价表单 (必须被id=&quot;ECS_SNATCH&quot;包含实现ajax刷新。)</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>snatch_price.lbi</td>
+<td width="80">库文件</td>
+<td>夺宝奇兵最新出价列表 (必须被id=&quot;ECS_PRICE_LIST&quot;包含实现ajax刷新。)</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>top10.lbi</td>
+<td width="80">库文件</td>
+<td>销售排行</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>ur_here.lbi</td>
+<td width="80">库文件</td>
+<td>当前位置</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>user_menu.lbi</td>
+<td>库文件</td>
+<td>用户中心菜单</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>vote.lbi</td>
+<td>库文件</td>
+<td>在线调查</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+<tr>
+<td>vote_list.lbi</td>
+<td>库文件</td>
+<td>在线调查(引用vote.lbi)</td>
+<td width="180" align="center">不可更改</td>
+</tr>
+</table></div>
+<div class="menu">
+</div>
+</body>
+</html>

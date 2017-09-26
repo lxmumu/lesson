@@ -1,0 +1,435 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>会员登录注册页_ecshop模块布局图_ecshop模板堂</title>
+<meta name="Keywords" content="ecshop模块布局图_各个页面模块布局设置_ecshop模板堂_ecshop教程" />
+<meta name="Description" content="ecshop模块布局图_各个页面模块布局设置_ecshop模板堂出品" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="jquery.js"></script>
+<SCRIPT LANGUAGE="JavaScript">
+function b(){
+	h = $(window).height();
+	t = $(document).scrollTop();
+	if(t > h){
+		$('#gotop').show();
+	}else{
+		$('#gotop').hide();
+	}
+}
+$(document).ready(function(e) {
+	b();
+	$('#gotop').click(function(){
+		$(document).scrollTop(0);	
+	})
+});
+
+$(window).scroll(function(e){
+	b();		
+})
+</SCRIPT>
+</head>
+<body>
+<div id="tbox">
+<a id="gotop" href="javascript:void(0)"></a>
+</div>
+<div class="block">
+<img src="user_passport.jpg" name="img" border="0" usemap="#imgMap" id="img" />
+<map name="imgMap" id="imgMap">
+<area shape="rect" coords="29,177,576,506" href="#a" alt="A" />
+<area shape="rect" coords="628,176,984,502" href="#b" alt="B" />
+<area shape="rect" coords="38,588,990,1368" href="#c" alt="c" />
+<area shape="rect" coords="26,1466,988,1745" href="#d" alt="" />
+</map>
+<div class="blank" style="height:100px;"></div>
+<a name=a></a>
+<h1>A.会员登录框</h1>
+<p>1,设置方法</p>
+<ul>
+自带模块<br/>
+</ul>
+<p>2,代码相关</p>
+user_passport.dwt 中
+<textarea name="" rows="" cols="">
+<div class="usBox_1 f_l">
+   <div class="logtitle"></div>
+   <form name="formLogin" action="user.php" method="post" onSubmit="return userLogin()">
+        <table width="100%" border="0" align="left" cellpadding="3" cellspacing="5">
+          <tr>
+            <td width="15%" align="right">{$lang.label_username}</td>
+            <td width="85%"><input name="username" type="text" size="25" class="inputBg" /></td>
+          </tr>
+          <tr>
+            <td align="right">{$lang.label_password}</td>
+            <td>
+            <input name="password" type="password" size="15"  class="inputBg"/>
+            </td>
+          </tr>
+          <!-- 判断是否启用验证码{if $enabled_captcha} -->
+          <tr>
+            <td align="right">{$lang.comment_captcha}</td>
+            <td><input type="text" size="8" name="captcha" class="inputBg" />
+            <img src="captcha.php?is_login=1&{$rand}" alt="captcha" style="vertical-align: middle;cursor: pointer;" onClick="this.src='captcha.php?is_login=1&'+Math.random()" /> </td>
+          </tr>
+          <!--{/if}-->
+          <tr>
+            <td colspan="2"><input type="checkbox" value="1" name="remember" id="remember" /><label for="remember">{$lang.remember}</label></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td align="left">
+            <input type="hidden" name="act" value="act_login" />
+            <input type="hidden" name="back_act" value="{$back_act}" />
+            <input type="submit" name="submit" value="" class="us_Submit" />
+            </td>
+          </tr>
+	  <tr><td></td><td><a href="user.php?act=qpassword_name" class="f3">{$lang.get_password_by_question}</a>&nbsp;&nbsp;&nbsp;<a href="user.php?act=get_password" class="f3">{$lang.get_password_by_mail}</a></td></tr>
+      </table>
+    </form>
+  </div>
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+.usBox{background:#f2f2f2; border:1px solid #e2e2e2; padding:15px; width:928px;}
+  .usBox_1{background:#fff; text-align:left; width:297px; height:208px; padding:43px 153px 60px 123px;}
+    .usBox_1 .logtitle{height:30px; background:url(images/ur_bg.gif) no-repeat 0px 0px;}
+    .us_Submit{border:none; width:115px; height:40px; background:url(images/bnt_ur_log.gif);}
+    .us_Submit_reg{border:none; width:113px; height:40px; background:url(images/bnt_ur_reg.gif);}
+</textarea>
+<a name=b></a>
+<h1>B.登录说明部分</h1>
+<p>1,设置方法</p>
+<ul>
+这里是用语言包来定义，可以通过后台<strong>语言项编辑</strong>来修改<br/>
+</ul>
+<p>2,代码相关</p>
+user_passport.dwt 中
+<textarea name="" rows="" cols="">
+<div class="usTxt">
+    <strong>{$lang.user_reg_info[0]}</strong>  <br />
+    <strong class="f4">{$lang.user_reg_info[1]}：</strong><br />
+    <!-- {if $car_off eq 1} -->
+    {$lang.user_reg_info[2]}<br />
+    <!--{/if}-->
+    <!-- {if $car_off eq 0} -->
+    {$lang.user_reg_info[8]}<br />
+    <!--{/if}-->
+    {$lang.user_reg_info[3]}：<br />
+    1. {$lang.user_reg_info[4]}<br />
+    2. {$lang.user_reg_info[5]}<br />
+    3. {$lang.user_reg_info[6]}<br />
+    4. {$lang.user_reg_info[7]}  <br />
+    <a href="user.php?act=register"><img src="images/bnt_ur_reg.gif" /></a>
+  </div>
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+  
+    .usTxt{width:265px; height:267px; padding:43px 0 0 90px; background:#f2f2f2; float:right;
+    text-align:left; background:url(images/ur_bg1.gif) no-repeat 0 50%; line-height:23px;
+    }
+    .usTxt img{margin-top:15px;}
+  </textarea>
+<a name=c></a>
+<h1>C.注册页</h1>
+<p>1,设置方法</p>
+<ul>
+<p>后台<strong>系统设置 - 会员注册项设置</strong> 可以修改注册项目，也可以新建自定义项目，并设置必填还是选填</p>
+</ul>
+<p>2,代码相关</p>
+user_passport.dwt 中
+<textarea name="" rows="" cols="">
+<!--*会员注册界面 start-->
+    <!--{if $action eq 'register'}-->
+    <!-- {if $shop_reg_closed eq 1} -->
+    <div class="usBox">
+      <div class="usBox_2 clearfix">
+        <div class="f1 f5" align="center">{$lang.shop_register_closed}</div>
+      </div>
+    </div>
+    <!-- {else} -->
+    {insert_scripts files='utils.js'}
+<div class="usBox">
+  <div class="usBox_2 clearfix">
+   <div class="regtitle"></div>
+    <form action="user.php" method="post" name="formUser" onsubmit="return register();">
+      <table width="100%"  border="0" align="left" cellpadding="5" cellspacing="3">
+        <tr>
+          <td width="13%" align="right">{$lang.label_username}</td>
+          <td width="87%">
+          <input name="username" type="text" size="25" id="username" onblur="is_registered(this.value);" class="inputBg"/>
+            <span id="username_notice" style="color:#FF0000"> *</span>
+          </td>
+        </tr>
+        <tr>
+          <td align="right">{$lang.label_email}</td>
+          <td>
+          <input name="email" type="text" size="25" id="email" onblur="checkEmail(this.value);"  class="inputBg"/>
+            <span id="email_notice" style="color:#FF0000"> *</span>
+          </td>
+        </tr>
+        <tr>
+          <td align="right">{$lang.label_password}</td>
+          <td>
+          <input name="password" type="password" id="password1" onblur="check_password(this.value);" onkeyup="checkIntensity(this.value)" class="inputBg" style="width:179px;" />
+            <span style="color:#FF0000" id="password_notice"> *</span>
+          </td>
+        </tr>
+        <tr>
+          <td align="right">{$lang.label_password_intensity}</td>
+          <td>
+            <table width="145" border="0" cellspacing="0" cellpadding="1">
+              <tr align="center">
+                <td width="33%" id="pwd_lower">{$lang.pwd_lower}</td>
+                <td width="33%" id="pwd_middle">{$lang.pwd_middle}</td>
+                <td width="33%" id="pwd_high">{$lang.pwd_high}</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td align="right">{$lang.label_confirm_password}</td>
+          <td>
+          <input name="confirm_password" type="password" id="conform_password" onblur="check_conform_password(this.value);"  class="inputBg" style="width:179px;"/>
+            <span style="color:#FF0000" id="conform_password_notice"> *</span>
+          </td>
+        </tr>
+        <!-- {foreach from=$extend_info_list item=field} -->
+	<!-- {if $field.id eq 6} -->
+        <tr>
+          <td align="right">{$lang.passwd_question}</td>
+          <td>
+          <select name='sel_question'>
+	  <option value='0'>{$lang.sel_question}</option>
+	  {html_options options=$passwd_questions}
+	  </select>
+          </td>
+        </tr>
+        <tr>
+          <td align="right" <!-- {if $field.is_need} -->id="passwd_quesetion"<!--{/if}-->>{$lang.passwd_answer}</td>
+          <td>
+	  <input name="passwd_answer" type="text" size="25" class="inputBg" maxlengt='20'/><!-- {if $field.is_need} --><span style="color:#FF0000"> *</span><!-- {/if} -->
+          </td>
+        </tr>
+	<!-- {else} -->
+        <tr>
+          <td align="right" <!-- {if $field.is_need} -->id="extend_field{$field.id}i"<!--{/if}-->>{$field.reg_field_name}
+          <td>
+          <input name="extend_field{$field.id}" type="text" size="25" class="inputBg" /><!-- {if $field.is_need} --><span style="color:#FF0000"> *</span><!-- {/if} -->
+          </td>
+        </tr>
+	<!-- {/if} -->
+	<!-- {/foreach} -->
+      <!-- 判断是否启用验证码{if $enabled_captcha} -->
+      <tr>
+      <td align="right">{$lang.comment_captcha}</td>
+      <td><input type="text" size="8" name="captcha" class="inputBg" />
+      <img src="captcha.php?{$rand}" alt="captcha" style="vertical-align: middle;cursor: pointer;" onClick="this.src='captcha.php?'+Math.random()" /> </td>
+      </tr>
+      <!--{/if}-->
+        <tr>
+          <td>&nbsp;</td>
+          <td><label>
+            <input name="agreement" type="checkbox" value="1" checked="checked" />
+            {$lang.agreement}</label></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td align="left">
+          <input name="act" type="hidden" value="act_register" >
+          <input type="hidden" name="back_act" value="{$back_act}" />
+          <input name="Submit" type="submit" value="" class="us_Submit_reg">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td class="actionSub">
+          <a href="user.php?act=login">{$lang.want_login}</a><br />
+          <a href="user.php?act=get_password">{$lang.forgot_password}</a>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>
+<!--{/if}-->
+<!--{/if}-->
+<!--#会员注册界面 end-->
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+ /*注册*/
+    .usBox_2{background:#fff; text-align:left; padding:43px 153px 60px 123px;}
+    .usBox_2 .regtitle{height:30px; background:url(images/ur_bg.gif) no-repeat 0px -34px;}
+    .actionSub a{color:#006acc; text-decoration:underline;
+    background:url(images/ur_bg.gif) no-repeat 0px -68px; padding-left:14px;
+    }
+  </textarea>
+<a name=d></a>
+<h1>D.找回密码</h1>
+<p>1,设置方法</p>
+<ul>
+系统自带功能，找回密码有整个流程，dwt相关if语句很清楚，样式都差不多，只要修改一个就行
+</ul>
+<p>2,代码相关</p>
+user_passport.dwt 中
+<textarea name="" rows="" cols="">
+
+<!--*找回密码界面 -->
+    <!--{if $action eq 'get_password'} -->
+    {insert_scripts files='utils.js'}
+    <script type="text/javascript">
+    {foreach from=$lang.password_js item=item key=key}
+      var {$key} = "{$item}";
+    {/foreach}
+    </script>
+<div class="usBox">
+  <div class="usBox_2 clearfix">
+    <form action="user.php" method="post" name="getPassword" onsubmit="return submitPwdInfo();">
+        <br />
+        <table width="70%" border="0" align="center">
+          <tr>
+            <td colspan="2" align="center"><strong>{$lang.username_and_email}</strong></td>
+          </tr>
+          <tr>
+            <td width="29%" align="right">{$lang.username}</td>
+            <td width="61%"><input name="user_name" type="text" size="30" class="inputBg" /></td>
+          </tr>
+          <tr>
+            <td align="right">{$lang.email}</td>
+            <td><input name="email" type="text" size="30" class="inputBg" /></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><input type="hidden" name="act" value="send_pwd_email" />
+              <input type="submit" name="submit" value="{$lang.submit}" class="bnt_blue" style="border:none;" />
+              <input name="button" type="button" onclick="history.back()" value="{$lang.back_page_up}" style="border:none;" class="bnt_blue_1" />
+	    </td>
+          </tr>
+        </table>
+        <br />
+      </form>
+  </div>
+</div>
+<!--{/if}-->
+
+<!--*通过问题找回密码的确认找回账号界面 -->
+    <!--{if $action eq 'qpassword_name'} -->
+<div class="usBox">
+  <div class="usBox_2 clearfix">
+    <form action="user.php" method="post">
+        <br />
+        <table width="70%" border="0" align="center">
+          <tr>
+            <td colspan="2" align="center"><strong>{$lang.get_question_username}</strong></td>
+          </tr>
+          <tr>
+            <td width="29%" align="right">{$lang.username}</td>
+            <td width="61%"><input name="user_name" type="text" size="30" class="inputBg" /></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><input type="hidden" name="act" value="get_passwd_question" />
+              <input type="submit" name="submit" value="{$lang.submit}" class="bnt_blue" style="border:none;" />
+              <input name="button" type="button" onclick="history.back()" value="{$lang.back_page_up}" style="border:none;" class="bnt_blue_1" />
+	    </td>
+          </tr>
+        </table>
+        <br />
+      </form>
+  </div>
+</div>
+<!--{/if}-->
+
+<!--*根据输入账号显示密码问题界面 -->
+    <!--{if $action eq 'get_passwd_question'} -->
+<div class="usBox">
+  <div class="usBox_2 clearfix">
+    <form action="user.php" method="post">
+        <br />
+        <table width="70%" border="0" align="center">
+          <tr>
+            <td colspan="2" align="center"><strong>{$lang.input_answer}</strong></td>
+          </tr>
+          <tr>
+            <td width="29%" align="right">{$lang.passwd_question}：</td>
+            <td width="61%">{$passwd_question}</td>
+          </tr>
+          <tr>
+            <td align="right">{$lang.passwd_answer}：</td>
+            <td><input name="passwd_answer" type="text" size="20" class="inputBg" /></td>
+          </tr>
+          <!-- 判断是否启用验证码{if $enabled_captcha} -->
+          <tr>
+            <td align="right">{$lang.comment_captcha}</td>
+            <td><input type="text" size="8" name="captcha" class="inputBg" />
+            <img src="captcha.php?is_login=1&{$rand}" alt="captcha" style="vertical-align: middle;cursor: pointer;" onClick="this.src='captcha.php?is_login=1&'+Math.random()" /> </td>
+          </tr>
+          <!--{/if}-->
+          <tr>
+            <td></td>
+            <td><input type="hidden" name="act" value="check_answer" />
+              <input type="submit" name="submit" value="{$lang.submit}" class="bnt_blue" style="border:none;" />
+              <input name="button" type="button" onclick="history.back()" value="{$lang.back_page_up}" style="border:none;" class="bnt_blue_1" />
+	    </td>
+          </tr>
+        </table>
+        <br />
+      </form>
+  </div>
+</div>
+<!--{/if}-->
+
+<!-- {if $action eq 'reset_password'} -->
+    <script type="text/javascript">
+    {foreach from=$lang.password_js item=item key=key}
+      var {$key} = "{$item}";
+    {/foreach}
+    </script>
+<div class="usBox">
+  <div class="usBox_2 clearfix">
+    <form action="user.php" method="post" name="getPassword2" onSubmit="return submitPwd()">
+      <br />
+      <table width="80%" border="0" align="center">
+        <tr>
+          <td>{$lang.new_password}</td>
+          <td><input name="new_password" type="password" size="25" class="inputBg" /></td>
+        </tr>
+        <tr>
+          <td>{$lang.confirm_password}:</td>
+          <td><input name="confirm_password" type="password" size="25"  class="inputBg"/></td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center">
+            <input type="hidden" name="act" value="act_edit_password" />
+            <input type="hidden" name="uid" value="{$uid}" />
+            <input type="hidden" name="code" value="{$code}" />
+            <input type="submit" name="submit" value="{$lang.confirm_submit}" />
+          </td>
+        </tr>
+      </table>
+      <br />
+    </form>
+  </div>
+</div>
+<!--{/if}-->
+<!--#找回密码界面 end-->
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+    .usBox_2{background:#fff; text-align:left; padding:43px 153px 60px 123px;}
+    .usBox_2 .regtitle{height:30px; background:url(images/ur_bg.gif) no-repeat 0px -34px;}
+    .actionSub a{color:#006acc; text-decoration:underline;
+    background:url(images/ur_bg.gif) no-repeat 0px -68px; padding-left:14px;
+    }
+</textarea>
+</div>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>活动列表页_ecshop模块布局图_ecshop模板堂</title>
+<meta name="Keywords" content="ecshop模块布局图_各个页面模块布局设置_ecshop模板堂_ecshop教程" />
+<meta name="Description" content="ecshop模块布局图_各个页面模块布局设置_ecshop模板堂出品" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="jquery.js"></script>
+<SCRIPT LANGUAGE="JavaScript">
+function b(){
+	h = $(window).height();
+	t = $(document).scrollTop();
+	if(t > h){
+		$('#gotop').show();
+	}else{
+		$('#gotop').hide();
+	}
+}
+$(document).ready(function(e) {
+	b();
+	$('#gotop').click(function(){
+		$(document).scrollTop(0);	
+	})
+});
+
+$(window).scroll(function(e){
+	b();		
+})
+</SCRIPT>
+</head>
+<body>
+<div id="tbox">
+<a id="gotop" href="javascript:void(0)"></a>
+</div>
+<div class="block">
+<img src="group_list.jpg" name="img" border="0" usemap="#imgMap" />
+<map name="imgMap" id="imgMap">
+<area shape="rect" coords="16,169,209,252" href="#a" alt="a" />
+<area shape="rect" coords="19,267,215,619" href="#b" alt="b" />
+<area shape="rect" coords="228,169,972,788" href="#c" alt="c" />
+<area shape="rect" coords="230,803,966,831" href="#d" alt="d" />
+<area shape="rect" coords="213,1157,948,1183" href="#h" alt="h" />
+</map>
+<div class="blank" style="height:100px;"></div>
+<a name=a></a>
+<h1>A.购物车</h1>
+<p>1,设置方法</p>
+<ul>
+程序自动读取购物车的商品数量
+<br/>
+</ul>
+<p>2,代码相关</p>
+cart.lbi 中
+<textarea name="" rows="" cols="">
+{insert_scripts files='transport.js'}
+<div class="cart" id="ECS_CARTINFO">
+ {insert name='cart_info'}
+</div>
+<div class="blank5"></div>
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+   /*购物车*/
+   .cart{background:url(images/catBg.gif) no-repeat left top; padding:15px 10px 15px 50px;
+   color:#006bcd; height:50px;  _padding:12px 10px 15px 50px;
+   }
+   .cart a{color:#006bcd; text-decoration:none;}
+   .cart a:hover{color:#006bcd; text-decoration:underline;}
+</textarea>
+<a name=b></a>
+<h1>B.商品分类树</h1>
+<p>1,设置方法</p>
+<ul>
+可以在后台<strong>商店管理-商品分类</strong>里修改<br/>
+详细教程：http://www.ecmoban.com/article-1688.html
+</ul>
+<p>2,代码相关</p>
+category_tree.lbi 中
+<textarea name="" rows="" cols="">
+<div class="box">
+ <div class="box_1">
+  <div id="category_tree">
+    <!--{foreach from=$categories item=cat}-->
+     <dl>
+     <dt><a href="{$cat.url}">{$cat.name|escape:html}</a></dt>
+     <!--{foreach from=$cat.cat_id item=child}-->
+     <dd><a href="{$child.url}">{$child.name|escape:html}</a></dd>
+       <!--{foreach from=$child.cat_id item=childer}-->
+       <dd>&nbsp;&nbsp;<a href="{$childer.url}">{$childer.name|escape:html}</a></dd>
+       <!--{/foreach}-->
+     <!--{/foreach}-->
+       
+       </dl>
+    <!--{/foreach}--> 
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+ /*商品分类*/
+   #category_tree{border:4px solid #f1faff; background-color:#fff;}
+   #category_tree dl{margin:6px;}
+   #category_tree dt{background:url(images/lineBg.gif) repeat-x left bottom;
+   color:#3f3f3f;  padding:2px 0 3px 12px;
+   }
+   #category_tree dt a{background:url(images/bg.gif) no-repeat 0 -69px;
+   color:#3f3f3f; padding-left:15px; text-decoration:none;
+   }
+   #category_tree dd{padding:3px 0 3px 10px;}
+   #category_tree dd a{color:#404040; text-decoration:none;}
+   #category_tree dd a:hover{color:#ff6600; text-decoration:none;}
+</textarea>
+<a name=c></a>
+<h1>C.活动列表区</h1>
+<p>1,设置方法</p>
+<ul>
+不同的活动有不同的设置规则，分别是：<br/>
+<strong>
+促销管理 - 夺宝奇兵<br/>
+促销管理 - 团购活动<br/>
+促销管理 - 拍卖活动<br/>
+</strong>
+设置的时候，记得把日期定义为从今天开始，否则不会显示出来，因为默认时间是从第二天开始
+</ul>
+<p>2,代码相关</p>
+group_buy_list.dwt 中 (这里以团购为例，其他活动分别为auction_list.dwt 拍卖活动，与 snatch.dwt 夺宝奇兵)
+<textarea name="" rows="" cols="">
+<div class="box">
+   <div class="box_1">
+    <h3><span>{$lang.gb_goods_name}</span></h3>
+    <div class="boxCenterList">
+      <!-- {if $gb_list} 如果有团购活动 -->
+      <!-- {foreach from=$gb_list item=group_buy} 循环团购活动开始 -->
+      <ul class="group clearfix">
+      <li style="margin-right:8px; text-align:center;">
+      <a href="{$group_buy.url}"><img src="{$group_buy.goods_thumb}" border="0" alt="{$group_buy.goods_name|escape:html}" style="vertical-align: middle" /></a>
+      </li>
+      <li style="width:555px; line-height:23px;">
+      {$lang.gb_goods_name}<a href="{$group_buy.url}" class="f5">{$group_buy.goods_name|escape:html}</a><br />
+      {$lang.act_time}：{$group_buy.formated_start_date} -- {$group_buy.formated_end_date}<br />
+      {$lang.gb_price_ladder}<br />
+      <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+       <tr>
+          <th width="29%" bgcolor="#FFFFFF">{$lang.gb_ladder_amount}</th>
+         <th width="71%" bgcolor="#FFFFFF">{$lang.gb_ladder_price}</th>
+        </tr>
+        <!-- {foreach from=$group_buy.price_ladder item=item} -->
+        <tr>
+          <td width="29%" bgcolor="#FFFFFF">{$item.amount}</td>
+         <td width="71%" bgcolor="#FFFFFF">{$item.formated_price}</td>
+        </tr>
+        <!-- {/foreach} -->
+      </table>
+      </li>
+      </ul>
+      <!--{/foreach}-->
+      <!-- {else} -->
+       <span style="margin:2px 10px; font-size:14px; line-height:36px;">{$lang.group_goods_empty}</span>
+      <!-- {/if} -->
+    </div>
+   </div>
+  </div>
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+/* ====================
+     团购
+==================== */
+    .group{background:#f2f2f2; padding:8px;}
+    .group li{float:left; background:#fff; padding:8px;}
+
+</textarea>
+<a name=d></a>
+<h1>D.页码区</h1>
+<p>1,设置方法</p>
+<ul>
+程序自带的分页效果,样式有两种,可以在后台 <strong>商店设置-显示设置</strong>里选择<br/>
+<img src="category2.jpg" border="0" /><br/>
+<img src="category3.jpg" border="0" />
+</ul>
+<p>2,代码相关</p>
+pages.lbi 中
+<textarea name="" rows="" cols="">
+<!--翻页 start-->
+<form name="selectPageForm" action="{$smarty.server.PHP_SELF}" method="get">
+<!-- {if $pager.styleid eq 0 } -->
+<div id="pager">
+  {$lang.pager_1}{$pager.record_count}{$lang.pager_2}{$lang.pager_3}{$pager.page_count}{$lang.pager_4} <span> <a href="{$pager.page_first}">{$lang.page_first}</a> <a href="{$pager.page_prev}">{$lang.page_prev}</a> <a href="{$pager.page_next}">{$lang.page_next}</a> <a href="{$pager.page_last}">{$lang.page_last}</a> </span>
+    <!--{foreach from=$pager.search key=key item=item}-->
+      {if $key eq 'keywords'}
+          <input type="hidden" name="{$key}" value="{$item|escape:decode_url}" />
+        {else}
+          <input type="hidden" name="{$key}" value="{$item}" />
+      {/if}
+    <!--{/foreach}-->
+    <select name="page" id="page" onchange="selectPage(this)">
+    {html_options options=$pager.array selected=$pager.page}
+    </select>
+</div>
+<!--{else}-->
+
+<!--翻页 start-->
+ <div id="pager" class="pagebar">
+  <span class="f_l f6" style="margin-right:10px;">{$lang.pager_1}<b>{$pager.record_count}</b> {$lang.pager_2}</span>
+  <!-- {if $pager.page_first} --><a href="{$pager.page_first}">{$lang.page_first} ...</a><!-- {/if} -->
+  <!-- {if $pager.page_prev} --><a class="prev" href="{$pager.page_prev}">{$lang.page_prev}</a><!-- {/if} -->
+  <!-- {if $pager.page_count neq 1} -->
+    <!--{foreach from=$pager.page_number key=key item=item}-->
+      <!-- {if $pager.page eq $key} -->
+      <span class="page_now">{$key}</span>
+      <!-- {else} -->
+      <a href="{$item}">[{$key}]</a>
+      <!-- {/if} -->
+    <!--{/foreach}-->
+  <!-- {/if} -->
+
+  <!-- {if $pager.page_next} --><a class="next" href="{$pager.page_next}">{$lang.page_next}</a><!-- {/if} -->
+  <!-- {if $pager.page_last} --><a class="last" href="{$pager.page_last}">...{$lang.page_last}</a><!-- {/if} -->
+  <!-- {if $pager.page_kbd} -->
+    <!--{foreach from=$pager.search key=key item=item}-->
+      {if $key eq 'keywords'}
+          <input type="hidden" name="{$key}" value="{$item|escape:decode_url}" />
+        {else}
+          <input type="hidden" name="{$key}" value="{$item}" />
+      {/if}
+    <!--{/foreach}-->
+    <kbd style="float:left; margin-left:8px; position:relative; bottom:3px;"><input type="text" name="page" onkeydown="if(event.keyCode==13)selectPage(this)" size="3" class="B_blue" /></kbd>
+    <!-- {/if} -->
+</div>
+<!--翻页 END-->
+
+<!-- {/if} -->
+</form>
+<script type="Text/Javascript" language="JavaScript">
+<!--
+{literal}
+function selectPage(sel)
+{
+  sel.form.submit();
+}
+{/literal}
+//-->
+</script>
+
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+   /*翻页*/
+   .pagebar{height:20px; float:right;}
+   .pagebar img{position:relative; top:2px;}
+   .pagebar a{display:block; float:left; margin:0 2px; color:#0066cc; text-decoration:none;}
+   .pagebar a:hover{color:#ff5a6a; text-decoration:none;}
+   .pagebar .page_now{display:block; float:left; margin:0 5px; color:#ff5a6a; font-weight:bold; background:#fff;}
+   #pager a{color:#0066cc; text-decoration:none;}
+</textarea>
+</div>
+</body>
+</html>

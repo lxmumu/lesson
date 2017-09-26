@@ -1,0 +1,1165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>首页_ecshop模块布局图_ecshop模板堂</title>
+<meta name="Keywords" content="ecshop模块布局图_各个页面模块布局设置_ecshop模板堂_ecshop教程" />
+<meta name="Description" content="ecshop模块布局图_各个页面模块布局设置_ecshop模板堂出品" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="jquery.js"></script>
+<SCRIPT LANGUAGE="JavaScript">
+function b(){
+	h = $(window).height();
+	t = $(document).scrollTop();
+	if(t > h){
+		$('#gotop').show();
+	}else{
+		$('#gotop').hide();
+	}
+}
+$(document).ready(function(e) {
+	b();
+	$('#gotop').click(function(){
+		$(document).scrollTop(0);	
+	})
+});
+
+$(window).scroll(function(e){
+	b();		
+})
+</SCRIPT>
+</head>
+<body>
+<div id="tbox">
+<a id="gotop" href="javascript:void(0)"></a>
+</div>
+<div class="block">
+<img src="index.jpg" name="img" border="0" usemap="#Map" id="img" />
+<map name="Map" id="Map"><area shape="rect" coords="9,8,220,46" href="#a" alt="a" />
+<area shape="rect" coords="428,11,967,44" href="#b" alt="b" />
+<area shape="rect" coords="27,56,898,85" href="#c" alt="c" />
+<area shape="rect" coords="21,98,969,127" href="#d" alt="d" />
+<area shape="rect" coords="24,146,209,251" href="#e" alt="e" />
+<area shape="rect" coords="22,270,209,336" href="#f" alt="f" />
+<area shape="rect" coords="236,147,727,371" href="#m" alt="m" />
+<area shape="rect" coords="752,146,971,370" href="#n" alt="n" />
+<area shape="rect" coords="22,352,208,711" href="#g" alt="g" />
+<area shape="rect" coords="235,386,729,579" href="#p" alt="p" />
+<area shape="rect" coords="749,387,970,580" href="#o" alt="o" />
+<area shape="rect" coords="237,599,970,1812" href="#q" alt="q" />
+<area shape="rect" coords="236,1831,971,2063" href="#r" alt="r" />
+<area shape="rect" coords="235,2080,969,2316" href="#s" alt="s" />
+<area shape="rect" coords="234,2337,971,2553" href="#t" alt="t" />
+<area shape="rect" coords="235,2570,972,2788" href="#u" alt="u" />
+<area shape="rect" coords="24,2805,970,2901" href="#v" alt="v" />
+<area shape="rect" coords="23,2917,971,2955" href="#w" alt="w" />
+<area shape="rect" coords="25,2971,972,3008" href="#x" alt="x" />
+<area shape="rect" coords="25,3024,972,3129" href="#y" alt="y" />
+<area shape="rect" coords="24,730,206,966" href="#h" alt="h" />
+<area shape="rect" coords="26,983,209,1245" href="#i" alt="i" />
+<area shape="rect" coords="26,1266,209,1358" href="#j" alt="j" />
+<area shape="rect" coords="23,1372,209,1467" href="#k" alt="k" />
+<area shape="rect" coords="25,1485,208,1580" href="#l" alt="l" />
+</map>
+<div class="blank" style="height:100px;"></div>
+<a name=a></a>
+<h1>A.logo替换</h1>
+<p>1,设置方法</p>
+<ul>
+后台商店设置里，上传logo就行,注意logo的名称必须是logo.gif
+<br/>
+<img src="index1.jpg" />
+</ul>
+<p>2,代码相关</p>
+page_header.lbi 中
+<textarea name="" rows="" cols="">
+<a href="../index.php" name="top"><img src="../images/logo.gif" /></a> 
+</textarea>
+<a name=b></a>
+<h1>B.会员登录区，和顶部导航栏</h1>
+<p>1,设置方法</p>
+<ul>
+会员登录区是系统自带的 导航栏的话，<strong>后台系统设置-自定义导航栏</strong>，设置“顶部”导航栏即可
+</ul>
+<p>2,代码相关</p>
+page_header.lbi 中
+<textarea name="" rows="" cols="">
+ <li class="userInfo">
+   {insert_scripts files='transport.js,utils.js'}
+   <font id="ECS_MEMBERZONE">{* ECSHOP 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'} </font>
+   </li>
+   <!--{if $navigator_list.top}-->
+   <li id="topNav" class="clearfix">
+    <!-- {foreach name=nav_top_list from=$navigator_list.top item=nav} -->
+            <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}<a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}</a>
+            <!-- {if !$smarty.foreach.nav_top_list.last} -->
+             |
+            <!-- {/if} -->
+    <!-- {/foreach} -->
+    <div class="topNavR"></div>
+   </li>
+   <!-- {/if} -->
+</textarea>
+member_info.lbi(注意这里的会员登录区是外部引用，所以还有member_info.lbi 需要修改)
+<textarea name="" rows="" cols="">
+{if $user_info}
+<font style="position:relative; top:10px;">
+{$lang.hello}，<font class="f4_b">{$user_info.username}</font>, {$lang.welcome_return}！
+<a href="user.php">{$lang.user_center}</a>|
+ <a href="user.php?act=logout">{$lang.user_logout}</a>
+</font>
+{else}
+ {$lang.welcome}&nbsp;&nbsp;&nbsp;&nbsp;
+ <a href="user.php"><img src="images/bnt_log.gif" /></a>
+ <a href="user.php?act=register"><img src="images/bnt_reg.gif" /></a>
+{/if}
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+ /*顶部管理型导航*/
+  .log{height:50px;}
+  .log li{float:left;}
+  .log .userInfo{*margin-right:10px; /*width:300px;*/ text-align:left;}
+  .log .userInfo a{color:#006acd; text-decoration:none;}
+  .log li img{position:relative; top:5px;}
+  #topNav{background:url(images/topNavBg.gif) no-repeat left top; height:31px;
+  line-height:31px; color:#bebfc1; padding:0px 15px; margin:0px 10px; position:relative;
+  }
+  #topNav .topNavR{background:url(images/topNavR.gif) no-repeat; width:5px; height:31px;
+  position:absolute; top:0px; right:0px;
+  }
+  #topNav a{color:#006ad0; text-decoration:none;}
+</textarea>
+<a name=c></a>
+<h1>C.中部导航栏</h1>
+<p>1,设置方法</p>
+<ul>
+后台<strong>系统设置-自定义导航栏</strong>，设置“中部”导航栏即可
+</ul>
+<p>2,代码相关</p>
+page_header.lbi 中
+<textarea name="" rows="" cols="">
+<div id="mainNav" class="clearfix">
+  <a href="../index.php"{if $navigator_list.config.index eq 1} class="cur"{/if}>{$lang.home}<span></span></a>
+  <!-- {foreach name=nav_middle_list from=$navigator_list.middle item=nav} -->
+  <a href="{$nav.url}" {if $nav.opennew eq 1}target="_blank" {/if} {if $nav.active eq 1} class="cur"{/if}>{$nav.name}<span></span></a>
+ <!-- {/foreach} -->
+</div>
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+/*页面主导航*/
+  #mainNav{padding:0 25px; width:910px;}
+  #mainNav a{display:block; height:26p; float:left; line-height:26px; text-align:center;
+  padding:0 15px; background:url(images/NavBg.gif) no-repeat 0 -29px; position:relative;
+  margin-right:2px; color:#026acb; text-decoration:none;
+  }
+  #mainNav a span{width:3px; height:26px; background:url(images/NavBg.gif) no-repeat 0 -88px;
+  position:absolute; top:0px; right:0px;
+  }
+  #mainNav a:hover{display:block; height:26p; float:left; line-height:26px; text-align:center;
+  padding:0 15px; background:url(images/NavBg.gif) no-repeat 0 0; position:relative;
+  margin-right:2px; color:#fff; text-decoration:none;
+  }
+  #mainNav .cur{display:block; height:26p; float:left; line-height:26px; text-align:center;
+  padding:0 15px; background:url(images/NavBg.gif) no-repeat 0 0; position:relative;
+  margin-right:2px; color:#fff; text-decoration:none; font-weight:bold;
+  }
+  #mainNav a:hover span,#mainNav .cur span{width:3px; height:26px; background:url(images/NavBg.gif) no-repeat 0 -59px;
+  position:absolute; top:0px; right:0px;
+  }
+</textarea>
+<a name=d></a>
+<h1>D.搜索区</h1>
+<p>1,设置方法</p>
+<ul>
+左侧的热门搜索关键字，可以在后台<strong>商店设置-显示设置</strong>里修改
+</ul>
+<p>2,代码相关</p>
+page_header.lbi 中
+<textarea name="" rows="" cols="">
+<div id="search"  class="clearfix">
+  <div class="keys f_l">
+   <script type="text/javascript">
+    {literal}
+    <!--
+    function checkSearchForm()
+    {
+        if(document.getElementById('keyword').value)
+        {
+            return true;
+        }
+        else
+        {
+            alert("{$lang.no_keywords}");
+            return false;
+        }
+    }
+    -->
+    {/literal}
+    </script>
+    {if $searchkeywords}
+   {$lang.hot_search} ：
+   {foreach from=$searchkeywords item=val}
+   <a href="search.php?keywords={$val|escape:url}">{$val}</a>
+   {/foreach}
+   {/if}
+  </div>
+  <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()" class="f_r"  style="_position:relative; top:5px;">
+   <select name="category" id="category" class="B_input">
+      <option value="0">{$lang.all_category}</option>
+      {$category_list}
+    </select>
+   <input name="keywords" type="text" id="keyword" value="{$search_keywords|escape}" class="B_input" style="width:110px;"/>
+   <input name="imageField" type="submit" value="" class="go" style="cursor:pointer;" />
+   <a href="search.php?act=advanced_search">{$lang.advanced_search}</a>
+   </form>
+</div>
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+ /*搜索*/
+  #search{border:1px solid #5cb4e6; background:url(images/searchBg.gif) repeat-x left top; width:918px;
+  padding:0px 20px; height:36px; line-height:36px;
+  }
+  #search a{color:#fff; text-decoration:none;}
+  #search .keys{background:url(images/bg.gif) no-repeat 0 -28px;
+  color:#fff; padding-left:40px;
+  }
+  #search .go{background:url(images/bnt_search.gif); border:none; width:52px; height:19px;/* position:relative; top:2px; utf8下*/}
+</textarea>
+<a name=e></a>
+<h1>E.商店公告</h1>
+<p>1,设置方法</p>
+<ul>
+可以在后台<strong>商店设置-显示设置</strong>里修改<br/>
+<img src="index2.jpg" border="0" alt="商店公告"/>
+</ul>
+<p>2,代码相关</p>
+index.dwt 中
+<textarea name="" rows="" cols="">
+    <!--站内公告 start-->
+    <div class="box">
+     <div class="box_1">
+      <h3><span>{$lang.shop_notice}</span></h3>
+      <div class="boxCenterList RelaArticle">
+        {$shop_notice}
+      </div>
+     </div>
+    </div>
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+没有特定css,都是共用css
+</textarea>
+<a name=f></a>
+<h1>F.购物车模块</h1>
+<p>1,设置方法</p>
+<ul>
+这个模块不常用，自动调用购物车数据
+</ul>
+<p>2,代码相关</p>
+cart.lbi中
+<textarea name="" rows="" cols="">
+{insert_scripts files='transport.js'}
+<div class="cart" id="ECS_CARTINFO">
+ {insert name='cart_info'}
+</div>
+<div class="blank5"></div>
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+/*购物车*/
+   .cart{background:url(images/catBg.gif) no-repeat left top; padding:15px 10px 15px 50px;
+   color:#006bcd; height:50px;  _padding:12px 10px 15px 50px;
+   }
+   .cart a{color:#006bcd; text-decoration:none;}
+   .cart a:hover{color:#006bcd; text-decoration:underline;}s
+</textarea>
+<a name=g></a>
+<h1>G.商品分类</h1>
+<p>1,设置方法</p>
+<ul>
+可以在后台<strong>商店管理-商品分类</strong>里修改<br/>
+详细教程：http://www.ecmoban.com/article-1688.html
+</ul>
+<p>2,代码相关</p>
+category_tree.lbi 中
+<textarea name="" rows="" cols="">
+<div class="box">
+ <div class="box_1">
+  <div id="category_tree">
+    <!--{foreach from=$categories item=cat}-->
+     <dl>
+     <dt><a href="{$cat.url}">{$cat.name|escape:html}</a></dt>
+     <!--{foreach from=$cat.cat_id item=child}-->
+     <dd><a href="{$child.url}">{$child.name|escape:html}</a></dd>
+       <!--{foreach from=$child.cat_id item=childer}-->
+       <dd>&nbsp;&nbsp;<a href="{$childer.url}">{$childer.name|escape:html}</a></dd>
+       <!--{/foreach}-->
+     <!--{/foreach}-->
+       
+       </dl>
+    <!--{/foreach}--> 
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+ /*商品分类*/
+   #category_tree{border:4px solid #f1faff; background-color:#fff;}
+   #category_tree dl{margin:6px;}
+   #category_tree dt{background:url(images/lineBg.gif) repeat-x left bottom;
+   color:#3f3f3f;  padding:2px 0 3px 12px;
+   }
+   #category_tree dt a{background:url(images/bg.gif) no-repeat 0 -69px;
+   color:#3f3f3f; padding-left:15px; text-decoration:none;
+   }
+   #category_tree dd{padding:3px 0 3px 10px;}
+   #category_tree dd a{color:#404040; text-decoration:none;}
+   #category_tree dd a:hover{color:#ff6600; text-decoration:none;}
+</textarea>
+<a name=h></a>
+<h1>H.销售排行榜</h1>
+<p>1,设置方法</p>
+<ul>
+销售排行榜，是自动调用已经购买过的商品，除此之外还必须有商品库存
+</ul>
+<p>2,代码相关</p>
+top10.lbi 中
+<textarea name="" rows="" cols="">
+<div class="box">
+ <div class="box_2">
+  <div class="top10Tit"></div>
+  <div class="top10List clearfix">
+  <!-- {foreach name=top_goods from=$top_goods item=goods}-->
+  <ul class="clearfix">
+	<img src="../images/top_{$smarty.foreach.top_goods.iteration}.gif" class="iteration" />
+	<!-- {if $smarty.foreach.top_goods.iteration<4}-->
+      <li class="topimg">
+      <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="samllimg" /></a>
+      </li>
+	<!-- {/if} -->		
+      <li {if $smarty.foreach.top_goods.iteration<4}class="iteration1"{/if}>
+      <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name}</a><br />
+      {$lang.shop_price}<font class="f1">{$goods.price}</font><br />
+      </li>
+    </ul>
+  <!-- {/foreach} -->
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+/*销售排行*/
+   .top10Tit{background:url(images/bg.gif) no-repeat 0px -85px; height:30px;}
+   .top10List{border:1px solid #d7ecfd; background-color:#fff; margin:0px 4px 4px 4px;}
+	 .top10List ul{border-bottom:1px solid #e2f3fd; position:relative;}
+	 .top10List .iteration{position:absolute; top:6px; left:6px;}
+	 .top10List .iteration1{padding-left:3px;}
+	 .top10List li.topimg{width:35px; height:35px;}
+	 .top10List .samllimg{width:35px; height:35px; margin-bottom:4px;}
+   .top10List li{padding:3px 3px 3px 23px; float:left;}
+   /*linkCOLOR*/
+   .top10List li a,#mallNews .NewsList li a,.boxCenterList li a{color:#3f3f3f; text-decoration:none;}
+   .top10List li a:hover,#mallNews .NewsList li a:hover,.boxCenterList li a:hover{color:#ff6600; text-decoration:none;}
+</textarea>
+<a name=i></a>
+<h1>I.促销信息</h1>
+<p>1,设置方法</p>
+<ul>
+自动调用促销活动里的信息
+</ul>
+<p>2,代码相关</p>
+promotion_info.lbi 中
+<textarea name="" rows="" cols="">
+<!-- {if $promotion_info} -->
+<!-- 促销信息 -->
+<div class="box">
+ <div class="box_1">
+  <h3><span>{$lang.promotion_info}</span></h3>
+  <div class="boxCenterList RelaArticle">
+    <!-- {foreach from=$promotion_info item=item key=key} -->
+    <!-- {if $item.type eq "snatch"} -->
+    <a href="snatch.php" title="{$lang.$item.type}">{$lang.snatch_promotion}</a>
+    <!-- {elseif $item.type eq "group_buy"} -->
+    <a href="group_buy.php" title="{$lang.$item.type}">{$lang.group_promotion}</a>
+    <!-- {elseif $item.type eq "auction"} -->
+    <a href="auction.php" title="{$lang.$item.type}">{$lang.auction_promotion}</a>
+    <!-- {elseif $item.type eq "favourable"} -->
+    <a href="activity.php" title="{$lang.$item.type}">{$lang.favourable_promotion}</a>
+    <!-- {elseif $item.type eq "package"} -->
+    <a href="package.php" title="{$lang.$item.type}">{$lang.package_promotion}</a>
+    <!-- {/if} -->
+    <a href="{$item.url}" title="{$lang.$item.type} {$item.act_name}{$item.time}" style="background:none; padding-left:0px;">{$item.act_name}</a><br />
+    <!-- {/foreach} -->
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+<!-- {/if} -->
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+没有特定css,都是共用css
+</textarea>
+<a name=j></a>
+<h1>J.订单查询</h1>
+<p>1,设置方法</p>
+<ul>
+订单查询模块，程序自带
+</ul>
+<p>2,代码相关</p>
+order_query.lbi 中
+<textarea name="" rows="" cols="">
+<!--{if empty($order_query)}-->
+<script>var invalid_order_sn = "{$lang.invalid_order_sn}"</script>
+<div class="box">
+ <div class="box_1">
+  <h3><span>{$lang.order_query}</span></h3>
+  <div class="boxCenterList">
+    <form name="ecsOrderQuery">
+    <input type="text" name="order_sn" class="inputBg" /><br />
+    <div class="blank5"></div>
+    <input type="button" value="{$lang.query_order}" class="bnt_blue_2" onclick="orderQuery()" />
+    </form>
+    <div id="ECS_ORDER_QUERY" style="margin-top:8px;">
+      <!--{else}-->
+      <!--{if $order_query.user_id}-->
+<b>{$lang.order_number}：</b><a href="user.php?act=order_detail&order_id={$order_query.order_id}" class="f6">{$order_query.order_sn}</a><br>
+  <!--{else}-->
+<b>{$lang.order_number}：</b>{$order_query.order_sn}<br>
+  <!--{/if}-->
+<b>{$lang.order_status}：</b><br><font class="f1">{$order_query.order_status}</font><br>
+  <!--{if $order_query.invoice_no }-->
+<b>{$lang.consignment}：</b>{$order_query.invoice_no}<br>
+  <!--{/if}-->
+      {if $order_query.shipping_date}：{$lang.shipping_date} {$order_query.shipping_date}<br>
+  <!--{/if}-->
+  <!--{/if}-->
+    </div>
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+没有特定css,都是共用css
+</textarea>
+<a name=k></a>
+<h1>K.发货查询</h1>
+<p>1,设置方法</p>
+<ul>
+自动调用最新的发货通知，必须有订单之后发货，但未收货的商品才会显示
+</ul>
+<p>2,代码相关</p>
+invoice_query.lbi 中
+<textarea name="" rows="" cols="">
+<!--{if $invoice_list}-->
+<style type="text/css">
+.boxCenterList form{display:inline;}
+.boxCenterList form a{color:#404040; text-decoration:underline;}
+</style>
+<div class="box">
+ <div class="box_1">
+  <h3><span>{$lang.shipping_query}</span></h3>
+  <div class="boxCenterList">
+    <!-- 发货单查询{foreach from=$invoice_list item=invoice} -->
+   {$lang.order_number} {$invoice.order_sn}<br />
+   {$lang.consignment} {$invoice.invoice_no}
+   <div class="blank"></div>
+   <!-- 结束发货单查询{/foreach}-->
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+<!-- {/if} -->
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+没有特定css,都是共用css
+</textarea>
+<a name=l></a>
+<h1>L.邮件订阅</h1>
+<p>1,设置方法</p>
+<ul>
+程序自带功能，订阅后可以在后台管理邮件与群发
+</ul>
+<p>2,代码相关</p>
+email_list.lbi 中
+<textarea name="" rows="" cols="">
+<div class="box">
+ <div class="box_1">
+  <h3><span>{$lang.email_subscribe}</span></h3>
+  <div class="boxCenterList RelaArticle">
+    <input type="text" id="user_email" class="inputBg" /><br />
+    <div class="blank5"></div>
+    <input type="button" class="bnt_blue" value="{$lang.email_list_ok}" onclick="add_email_list();" />
+    <input type="button" class="bnt_bonus"  value="{$lang.email_list_cancel}" onclick="cancel_email_list();" />
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+<script type="text/javascript">
+var email = document.getElementById('user_email');
+function add_email_list()
+{
+  if (check_email())
+  {
+    Ajax.call('user.php?act=email_list&job=add&email=' + email.value, '', rep_add_email_list, 'GET', 'TEXT');
+  }
+}
+function rep_add_email_list(text)
+{
+  alert(text);
+}
+function cancel_email_list()
+{
+  if (check_email())
+  {
+    Ajax.call('user.php?act=email_list&job=del&email=' + email.value, '', rep_cancel_email_list, 'GET', 'TEXT');
+  }
+}
+function rep_cancel_email_list(text)
+{
+  alert(text);
+}
+function check_email()
+{
+  if (Utils.isEmail(email.value))
+  {
+    return true;
+  }
+  else
+  {
+    alert('{$lang.email_invalid}');
+    return false;
+  }
+}
+</script>
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+没有特定css,都是共用css
+</textarea>
+<a name=m></a>
+<h1>M.首页主广告</h1>
+<p>1,设置方法</p>
+<ul>
+可以在后台<strong>系统设置-首页主广告管理</strong>里修改<br/>
+详细说明：http://www.ecmoban.com/article-31.html
+</ul>
+<p>2,代码相关</p>
+index.dwt中
+<textarea name="" rows="" cols="">
+<div class="f_l" id="focus">
+调用index_ad.lbi
+</div>
+</textarea>
+index_ad.lbi 中
+<textarea name="" rows="" cols="">
+<!-- {if $index_ad eq 'sys'} -->
+  <script type="text/javascript">
+  var swf_width=484;
+  var swf_height=200;
+  </script>
+  <script type="text/javascript" src="data/flashdata/{$flash_theme}/cycle_image.js"></script>
+<!-- {elseif $index_ad eq 'cus'} -->
+  <!-- {if $ad.ad_type eq 0} -->
+    <a href="{$ad.url}" target="_blank"><img src="{$ad.content}" width="484" height="200" border="0"></a>
+  <!-- {elseif $ad.ad_type eq 1} -->
+    <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="484" height="200">
+      <param name="movie" value="{$ad.content}" />
+      <param name="quality" value="high" />
+      <embed src="{$ad.content}" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="484" height="200"></embed>
+    </object>
+  <!-- {elseif $ad.ad_type eq 2} -->
+    {$ad.content}
+  <!-- {elseif $ad.ad_type eq 3} -->
+    <a href="{$ad.url}" target="_blank">{$ad.content}</a>
+  <!-- {/if} -->
+<!-- {else} -->
+<!-- {/if} -->
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+/*首页焦点图*/
+#focus{border-right:1px solid #c5e4ff; padding:8px; background:url(images/foucsBg.gif) repeat-x left top;}
+
+大小的话可以手动改index_ad.lbi代码里，所有width,和height值
+</textarea>
+<a name=n></a>
+<h1>N.站内快讯</h1>
+<p>1,设置方法</p>
+<ul>
+站内快讯模块，是自动调用所有一级文章分类下的，最新文章
+详细说明：http://www.ecmoban.com/article-1476.html
+</ul>
+<p>2,代码相关</p>
+index.dwt 中
+<textarea name="" rows="" cols="">
+<div id="mallNews" class="f_r">
+        <div class="NewsTit"></div>
+        <div class="NewsList tc">
+        调用new_articles.lbi
+        </div>
+       </div>
+</textarea>
+以及外部调用 new_articles.lbi 中
+<textarea name="" rows="" cols="">
+   #mallNews{width:230px; padding:8px 8px 0px 8px; background:url(images/foucsBg.gif) repeat-x left top;}
+   #mallNews .NewsTit{background:url(images/bg.gif) 0px -132px; height:23px;}
+   #mallNews .NewsList{background:#FFFFFF; padding:8px;}
+   #mallNews .NewsList ul{margin-top:10px;}
+   #mallNews .NewsList li{background:url(images/bg.gif) no-repeat 0px -167px; padding:0px 0px 0px 10px;
+   text-align:left;
+   }
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+没有特定css,都是共用css
+</textarea>
+<a name=o></a>
+<h1>O.商品品牌</h1>
+<p>1,设置方法</p>
+<ul>
+可以在后台<strong>商品管理-商品品牌</strong>里修改<br/>
+详细说明：http://www.ecmoban.com/article-1786.html
+</ul>
+<p>2,代码相关</p>
+index.dwt 中
+<textarea name="" rows="" cols="">
+ <div class="box f_r brandsIe6">
+       <div class="box_1 clearfix" id="brands">
+      调用brands.lbi
+       </div>
+      </div>
+</textarea>
+brands.lbi 中
+<textarea name="" rows="" cols="">
+<!-- {if $brand_list} -->
+  <!-- {foreach from=$brand_list item=brand name="brand_foreach"} -->
+    {if $smarty.foreach.brand_foreach.index <= 11}
+      <!-- {if $brand.brand_logo} -->
+        <a href="{$brand.url}"><img src="data/brandlogo/{$brand.brand_logo}" alt="{$brand.brand_name|escape:html} ({$brand.goods_num})" /></a>
+      <!-- {else} -->
+        <a href="{$brand.url}">{$brand.brand_name|escape:html} {if $brand.goods_num}({$brand.goods_num}){/if}</a>
+      <!-- {/if} -->
+    {/if}
+  <!-- {/foreach} -->
+<div class="brandsMore"><a href="../brand.php"><img src="images/moreBrands.gif" /></a></div>
+<!-- {/if} -->
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+  #brands{width:247px; height:199px; *height:201px; padding:1px 0 0 1px; position:relative;}
+   #brands .brandsMore{position:absolute; left:178px; bottom:10px;
+   width:65px; height:41px;
+   }
+   #brands .brandsMore img{border:none; width:65px; height:41px;}
+   #brands img{width:78px; height:40px;border:1px solid #c5e4ff;}
+   #brands a{color:#0069cd; text-decoration:none; margin:2px 1px; display:block; float:left;}
+     .brandsIe6{_width:250px;}/*在ie6下特价商品不存在的话品牌推荐永远靠右显示*/
+</textarea>
+<a name=p></a>
+<h1>P.今日特价</h1>
+<p>1,设置方法</p>
+<ul>
+可以在后台<strong>商品列表-商品管理</strong>里编辑，设置促销价格即可<br/>
+</ul>
+<p>2,代码相关</p>
+recommend_promotion.lbi 中
+<textarea name="" rows="" cols="">
+<!-- {if $promotion_goods} -->
+<div id="sales" class="f_l clearfix">
+      <h1><a href="../search.php?intro=promotion"><img src="images/more.gif" /></a></h1>
+       <div class="clearfix goodBox">
+         <!--{foreach from=$promotion_goods item=goods name="promotion_foreach"}-->
+         {if $smarty.foreach.promotion_foreach.index <= 3}
+           <div class="goodList">
+           <a href="{$goods.url}"><img src="{$goods.thumb}" border="0" alt="{$goods.name|escape:html}"/></a><br />
+					 <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a></p>
+           {$lang.promote_price}<font class="f1">{$goods.promote_price}</font>
+           </div>
+         {/if}
+         <!--{/foreach}-->
+       </div>
+      </div>
+<!-- {/if} -->
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+  /*今日特价和品牌*/
+   #sales{width:500px; background:url(images/salesBg.gif) repeat-x left bottom;
+   border-bottom:2px solid #f0f1f3; background-color:#eef8ff;
+   }
+   #sales h1{font-size:12px; background:url(images/salesTitBg.gif) no-repeat; height:33px; text-align:right;}
+   #sales h1 img{position:relative; top:10px; right:8px;}
+   #sales .goodBox{margin:10px 0px 10px 10px; _margin-left:5px;}
+     #sales .goodBox .goodList p{text-align:left; color:#3f3f3f;}
+     #sales .goodBox .goodList p a{color:#3f3f3f; text-decoration:none;}
+   #sales .goodBox .goodList p a:hover{color:#ff6600; text-decoration:none;}
+   #sales .goodList{width:110px; margin:0px 5px 0px 5px; float:left;}
+   #sales .goodList img{background:url(images/salesGoodBg.gif) no-repeat; width:100px; height:100px; padding:5px;
+   }
+   #sales .goodList p{ margin-top:3px; text-align:center;}
+</textarea>
+<a name=q></a>
+<h1>Q.精品推荐，新品上市，热卖商品</h1>
+<p>1,设置方法</p>
+<ul>
+可以在后台<strong>商品管理-商品列表</strong>里勾选精品，新品，或热卖<br/>
+<img src="index3.jpg" />
+</ul>
+<p>2,代码相关</p>
+精品 recommend_best.lbi<br/>
+新品 recommend_new.lbi<br/>
+热卖 recommend_hot.lbi<br/>
+下面的代码以 精品 recommend_best.lbi 为例
+<textarea name="" rows="" cols="">
+<!-- {if $best_goods} -->
+<!-- {if $cat_rec_sign neq 1} -->
+<div class="box">
+<div class="box_2 centerPadd">
+  <div class="itemTit" id="itemBest">
+      {if $cat_rec[1]}
+      <h2><a href="javascript:void(0)" onclick="change_tab_style('itemBest', 'h2', this);get_cat_recommend(1, 0);">{$lang.all_goods}</a></h2>
+      {foreach from=$cat_rec[1] item=rec_data}
+      <h2 class="h2bg"><a href="javascript:void(0)" onclick="change_tab_style('itemBest', 'h2', this);get_cat_recommend(1, {$rec_data.cat_id})">{$rec_data.cat_name}</a></h2>
+      {/foreach}
+      {/if}
+  </div>
+  <div id="show_best_area" class="clearfix goodsBox">
+  <!-- {/if} -->
+  <!--{foreach from=$best_goods item=goods}-->
+  <div class="goodsItem">
+         <span class="best"></span>
+           <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="goodsimg" /></a><br />
+           <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a></p>
+           <font class="f1">
+           <!-- {if $goods.promote_price neq ""} -->
+          {$goods.promote_price}
+          <!-- {else}-->
+          {$goods.shop_price}
+          <!--{/if}-->
+           </font>
+        </div>
+  <!--{/foreach}-->
+  <div class="more"><a href="../search.php?intro=best"><img src="images/more.gif" /></a></div>
+  <!-- {if $cat_rec_sign neq 1} -->
+  </div>
+</div>
+</div>
+<div class="blank5"></div>
+  <!-- {/if} -->
+<!-- {/if} -->
+
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+.centerPadd{padding:5px 8px 8px 8px; overflow:hidden;}
+   .itemTit{height:30px; background:url(images/bg.gif) no-repeat 0px -195px; padding-left:190px; text-align:right;
+   /*margin-bottom:-3px; _margin-bottom:-2px;*/
+   }
+   .itemTit.New{background:url(images/bg.gif) no-repeat 0px -225px;}
+   .itemTit.Hot{background:url(images/bg.gif) no-repeat 0px -256px;}
+   .itemTit img{position:relative; top:7px;}
+   .itemTit h2{float:left; height:27px; background:url(images/itemH2Bg.gif) repeat-x left top; border:1px solid #d6ecff;
+   font-size:12px; text-align:center; color:#3f3f3f; font-weight:100; padding:0px 10px; line-height:28px; margin:0 6px 0 0;
+   border-bottom:none; position:relative; bottom:-3px; display:inline; white-space:nowrap;
+   }
+   .itemTit h2 a{color:#3f3f3f; text-decoration:none;}
+   .itemTit .h2bg{height:27px; line-height:28px; border:none; background:none;
+   font-size:12px; text-align:center; color:#006ace; font-weight:100; padding:0px 10px;
+     display:inline; white-space:nowrap;
+   }
+   .itemTit .h2bg a{color:#006ace; text-decoration:none;}
+   .centerPadd .goodsBox{border:1px solid #d6ecff; background:#fff; padding:12px 0px 0px 17px; *padding:12px 0px 0px 17px;
+   _padding:12px 0px 0px 0px;}
+   .centerPadd .goodsBox .more{text-align:right; clear:both; margin:0 8px 8px 0;}
+       /*单个商品*/
+       .goodsItem{width:110px; float:left; position:relative; overflow:hidden; margin:0px 14px 15px 14px;}
+       .goodsItem .goodsimg{width:100px; height:100px; border:4px solid #eef8ff; margin-bottom:4px;}
+       .goodsItem img{width:52px; height:17px;}
+       .goodsItem p{text-align:left; color:#3f3f3f;}
+       .goodsItem p a{color:#3f3f3f; text-decoration:none;}
+       .goodsItem p a:hover{color:#ff6600; text-decoration:none;}
+       .goodsItem span{width:40px; height:40px; position:absolute;left:0px; top:0px;}
+       .goodsItem span.best{background:url(images/bg.gif) no-repeat 0px -304px;}
+       .goodsItem span.news{background:url(images/bg.gif) no-repeat -75px -304px;}
+       .goodsItem span.hot{background:url(images/bg.gif) no-repeat -161px -304px;}
+
+</textarea>
+<a name=r></a>
+<h1>R.分类下商品</h1>
+<p>1,设置方法</p>
+<ul>
+可以在后台<strong>模板管理-设置模板</strong>调用“分类下商品”即可<br/>
+<img src="index4.jpg" border="0" alt="分类下商品"/>
+</ul>
+<p>2,代码相关</p>
+cat_goods.lbi 中
+<textarea name="" rows="" cols="">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="box">
+ <div class="box_1">
+  <h3><span><a href="{$goods_cat.url}" class="f6">{$goods_cat.name|escape:html}</a></span></h3>
+    <div class="centerPadd">
+    <div class="clearfix goodsBox" style="border:none;">
+      <!--{foreach from=$cat_goods item=goods}-->
+      <div class="goodsItem">
+           <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="goodsimg" /></a><br />
+           <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a></p>
+           <!-- {if $goods.promote_price neq ""} -->
+          <font class="shop_s">{$goods.promote_price}</font>
+          <!-- {else}-->
+          <font class="shop_s">{$goods.shop_price}</font>
+          <!--{/if}-->
+        </div>
+      <!--{/foreach}-->
+      <div class="more"><a href="{$goods_cat.url}"><img src="images/more.gif" /></a></div>
+    </div>
+    </div>
+ </div>
+</div>
+<div class="blank5"></div>
+</textarea>
+<p>3,相关css</p>
+style.css 中(商品区域的css内容与上面通用)
+<textarea name="" rows="" cols="">
+ .centerPadd .goodsBox{border:1px solid #d6ecff; background:#fff; padding:12px 0px 0px 17px; *padding:12px 0px 0px 17px;
+   _padding:12px 0px 0px 0px;}
+   .centerPadd .goodsBox .more{text-align:right; clear:both; margin:0 8px 8px 0;}
+       /*单个商品*/
+       .goodsItem{width:110px; float:left; position:relative; overflow:hidden; margin:0px 14px 15px 14px;}
+       .goodsItem .goodsimg{width:100px; height:100px; border:4px solid #eef8ff; margin-bottom:4px;}
+       .goodsItem img{width:52px; height:17px;}
+       .goodsItem p{text-align:left; color:#3f3f3f;}
+       .goodsItem p a{color:#3f3f3f; text-decoration:none;}
+       .goodsItem p a:hover{color:#ff6600; text-decoration:none;}
+       .goodsItem span{width:40px; height:40px; position:absolute;left:0px; top:0px;}
+       .goodsItem span.best{background:url(images/bg.gif) no-repeat 0px -304px;}
+       .goodsItem span.news{background:url(images/bg.gif) no-repeat -75px -304px;}
+       .goodsItem span.hot{background:url(images/bg.gif) no-repeat -161px -304px;}
+</textarea>
+<a name=s></a>
+<h1>S.品牌下商品</h1>
+<p>1,设置方法</p>
+<ul>
+可以在后台<strong>模板管理-设置模板</strong>调用“品牌的商品”<br/>
+<img src="index5.jpg" border="0" alt="品牌下商品"/>
+</ul>
+<p>2,代码相关</p>
+brand_goods.lbi 中
+<textarea name="" rows="" cols="">
+<div class="box">
+ <div class="box_1">
+  <h3><span><a href="{$goods_brand.url}" class="f6">{$goods_brand.name|escape:html}</a></span></h3>
+    <div class="centerPadd">
+    <div class="clearfix goodsBox" style="border:none;">
+      <!--{foreach from=$brand_goods item=goods}-->
+      <div class="goodsItem">
+           <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="goodsimg" /></a><br />
+           <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a></p>
+            <!-- {if $goods.promote_price neq ""} -->
+            <font class="shop_s">{$goods.promote_price}</font>
+            <!-- {else}-->
+            <font class="shop_s">{$goods.shop_price}</font>
+            <!--{/if}-->
+        </div>
+      <!--{/foreach}-->
+      <div class="more"><a href="{$goods_brand.url}"><img src="images/more.gif" /></a></div>
+    </div>
+    </div>
+ </div>
+</div>
+<div class="blank5"></div>
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+与上面模块一致
+</textarea>
+<a name=t></a>
+<h1>T.拍卖商品</h1>
+<p>1,设置方法</p>
+<ul>
+可以在后台<strong>促销管理-拍卖活动</strong>里设置拍卖商品<br/>
+详细说明：http://www.ecmoban.com/article.php?id=1803
+</ul>
+<p>2,代码相关</p>
+auction.lbi 中
+<textarea name="" rows="" cols="">
+<!-- {if $auction_list} -->
+<div class="box">
+ <div class="box_1">
+  <h3><span>{$lang.auction_goods}</span><a href="auction.php"><img src="../images/more.gif"></a></h3>
+    <div class="centerPadd">
+    <div class="clearfix goodsBox" style="border:none;">
+      <!--{foreach from=$auction_list item=auction}-->
+      <div class="goodsItem">
+           <a href="{$auction.url}"><img src="{$auction.thumb}" alt="{$auction.goods_name|escape:html}" class="goodsimg" /></a><br />
+           <p><a href="{$auction.url}" title="{$auction.goods_name|escape:html}">{$auction.short_style_name|escape:html}</a></p>
+           <font class="shop_s">{$auction.formated_start_price}</font>
+        </div>
+      <!--{/foreach}-->
+    </div>
+    </div>
+ </div>
+</div>
+<div class="blank5"></div>
+<!-- {/if} -->
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+与上面模块一致
+</textarea>
+<a name=u></a>
+<h1>U.团购商品</h1>
+<p>1,设置方法</p>
+<ul>
+可以在后台<strong>促销管理-团购活动</strong>里设置团购商品<br/>
+详细说明：http://www.ecmoban.com/article.php?id=1804
+</ul>
+<p>2,代码相关</p>
+group_buy.lbi 中
+<textarea name="" rows="" cols="">
+<!-- {if $group_buy_goods} -->
+<div class="box">
+ <div class="box_1">
+  <h3><span>{$lang.group_buy_goods}</span><a href="group_buy.php"><img src="../images/more.gif"></a></h3>
+    <div class="centerPadd">
+    <div class="clearfix goodsBox" style="border:none;">
+      <!--{foreach from=$group_buy_goods item=goods}-->
+      <div class="goodsItem">
+           <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.goods_name|escape:html}" class="goodsimg" /></a><br />
+					 <p><a href="{$goods.url}" title="{$goods.goods_name|escape:html}">{$goods.short_style_name|escape:html}</a></p>
+           <font class="shop_s">{$goods.last_price}</font>
+        </div>
+      <!--{/foreach}-->
+    </div>
+    </div>
+ </div>
+</div>
+<div class="blank5"></div>
+<!-- {/if} -->
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+与上面模块一致
+</textarea>
+<a name=v></a>
+<h1>V.底部帮助分类</h1>
+<p>1,设置方法</p>
+<ul>
+直接调用后台<strong>文章分类</strong>里的网店帮助分类下的文章分类下的文章<br/>
+详细说明：http://www.ecmoban.com/article-1558.html
+</ul>
+<p>2,代码相关</p>
+index.dwt 中
+<textarea name="" rows="" cols="">
+<!--帮助-->
+<div class="block">
+  <div class="box">
+   <div class="helpTitBg clearfix">
+    调用help.lbi
+   </div>
+  </div>
+</div>
+<div class="blank"></div>
+<!--帮助-->
+</textarea>
+help.lbi 中
+<textarea name="" rows="" cols="">
+<!--{if $helps}-->
+<!-- {foreach from=$helps item=help_cat} -->
+<dl>
+  <dt><a href='{$help_cat.cat_id}' title="{$help_cat.cat_name}">{$help_cat.cat_name}</a></dt>
+  <!-- {foreach from=$help_cat.article item=item} -->
+  <dd><a href="{$item.url}" title="{$item.title|escape:html}">{$item.short_title}</a></dd>
+  <!-- {/foreach} -->
+</dl>
+<!-- {/foreach} -->
+<!--{/if}-->
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+/*帮助*/
+   .helpTitBg{background:url(images/helpTitBg.gif) repeat-x left top; text-align:left; border:1px solid #c5e4ff; background-color:#fff;
+   padding:0 0 10px 15px;
+   }
+   .helpTitBg dl{float:left; margin-right:30px; _margin-right:20px; _width:130px;}
+   .helpTitBg dt{background:url(images/bg.gif) no-repeat 0px -570px;width:auto; height:33px; line-height:33px; text-align:left;
+   font-weight:bold; color:#56a5ee; padding-left:12px; margin-bottom:8px;}
+     .helpTitBg dt a{font-weight:bold; color:#56a5ee; text-decoration:none;}
+   .helpTitBg dd a{color:#006acd; text-decoration:none; background:url(images/bg.gif) no-repeat 0px -170px; padding:0px 0px 0px 10px;}
+</textarea>
+<a name=w></a>
+<h1>W.友情连接</h1>
+<p>1,设置方法</p>
+<ul>
+直接调用后台<strong>系统设置-友情连接</strong>里直接添加友情连接<br/>
+<img src="index6.jpg" border="0" alt="友情连接"/>
+</ul>
+<p>2,代码相关</p>
+index.dwt 中
+<textarea name="" rows="" cols="">
+<!--友情链接 start-->
+<!--{if $img_links  or $txt_links }-->
+<div id="bottomNav" class="box">
+ <div class="box_1">
+  <div class="links clearfix">
+    <!--开始图片类型的友情链接{foreach from=$img_links item=link}-->
+    <a href="{$link.url}" target="_blank" title="{$link.name}"><img src="{$link.logo}" alt="{$link.name}" border="0" /></a>
+    <!--结束图片类型的友情链接{/foreach}-->
+    <!-- {if $txt_links} -->
+    <!--开始文字类型的友情链接{foreach from=$txt_links item=link}-->
+    [<a href="{$link.url}" target="_blank" title="{$link.name}">{$link.name}</a>]
+    <!--结束文字类型的友情链接{/foreach}-->
+    <!-- {/if} -->
+  </div>
+ </div>
+</div>
+<!--{/if}-->
+<!--友情链接 end-->
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+   .bNavList{border:1px solid #fff; background:#eef6f9; height:27px; line-height:27px; padding:0 12px;}
+   .links{border:1px solid #fff; background:#eef6f9; padding:0 12px;}
+   .bNavList a,.links a{color:#006acd; text-decoration:none;}
+   .bNavList img{_position:relative; top:8px;}
+   .links img{width:88px; height:30px; margin:5px;}
+</textarea>
+<a name=x></a>
+<h1>X.底部导航栏修改</h1>
+<p>1,设置方法</p>
+<ul>
+直接调用后台<strong>系统设置-自定义导航栏</strong>的底部导航栏<br/>
+</ul>
+<p>2,代码相关</p>
+page_footer.lbi 中
+<textarea name="" rows="" cols="">
+<!--底部导航 start-->
+<div id="bottomNav" class="box">
+ <div class="box_1">
+  <div class="bNavList clearfix">
+   <div class="f_l">
+   <!-- {if $navigator_list.bottom} -->
+   <!-- {foreach name=nav_bottom_list from=$navigator_list.bottom item=nav} -->
+        <a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}</a>
+        <!-- {if !$smarty.foreach.nav_bottom_list.last} -->
+           -
+        <!-- {/if} -->
+      <!-- {/foreach} -->
+  <!-- {/if} -->
+   </div>
+   <div class="f_r">
+   <a href="#top"><img src="images/bnt_top.gif" /></a> <a href="../index.php"><img src="images/bnt_home.gif" /></a>
+   </div>
+  </div>
+ </div>
+</div>
+<!--底部导航 end-->
+</textarea>
+<p>3,相关css</p>
+style.css 中 这里有些代码与上面通用
+<textarea name="" rows="" cols="">
+   #bottomNav{width:958px;}
+   .bNavList{border:1px solid #fff; background:#eef6f9; height:27px; line-height:27px; padding:0 12px;}
+</textarea>
+<a name=y></a>
+<h1>Y.底部模块修改</h1>
+<p>1,设置方法</p>
+<ul>
+底部大部分内容是调用后台<strong>商店设置</strong>里面的内容，比如电话号码，qq之类<br/>
+</ul>
+<p>2,代码相关</p>
+page_footer.lbi 中
+<textarea name="" rows="" cols="">
+<!--版权 start-->
+<div id="footer">
+ <div class="text">
+ {$copyright}<br />
+ {$shop_address} {$shop_postcode}
+ <!-- 客服电话{if $service_phone} -->
+      Tel: {$service_phone}
+ <!-- 结束客服电话{/if} -->
+ <!-- 邮件{if $service_email} -->
+      E-mail: {$service_email}<br />
+ <!-- 结束邮件{/if} -->
+ <!-- QQ 号码 {foreach from=$qq item=im} -->
+      <!-- {if $im} -->
+      <a href="http://wpa.qq.com/msgrd?V=1&amp;Uin={$im}&amp;Site={$shop_name}&amp;Menu=yes" target="_blank"><img src="http://wpa.qq.com/pa?p=1:{$im}:4" height="16" border="0" alt="QQ" /> {$im}</a>
+      <!-- {/if} -->
+      <!-- {/foreach} 结束QQ号码 -->
+      <!-- 淘宝旺旺 {foreach from=$ww item=im} -->
+      <!-- {if $im} -->
+      <a href="http://amos1.taobao.com/msg.ww?v=2&uid={$im|escape:u8_url}&s=2" target="_blank"><img src="http://amos1.taobao.com/online.ww?v=2&uid={$im|escape:u8_url}&s=2" width="16" height="16" border="0" alt="淘宝旺旺" />{$im}</a>
+      <!-- {/if} -->
+      <!--{/foreach} 结束淘宝旺旺 -->
+      <!-- Yahoo Messenger {foreach from=$ym item=im} -->
+      <!-- {if $im} -->
+      <a href="http://edit.yahoo.com/config/send_webmesg?.target={$im}n&.src=pg" target="_blank"><img src="../images/yahoo.gif" width="18" height="17" border="0" alt="Yahoo Messenger" /> {$im}</a>
+      <!-- {/if} -->
+      <!-- {/foreach} 结束Yahoo Messenger -->
+      <!-- MSN Messenger {foreach from=$msn item=im} -->
+      <!-- {if $im} -->
+      <img src="../images/msn.gif" width="18" height="17" border="0" alt="MSN" /> <a href="msnim:chat?contact={$im}">{$im}</a>
+      <!-- {/if} -->
+      <!-- {/foreach} 结束MSN Messenger -->
+      <!-- Skype {foreach from=$skype item=im} -->
+      <!-- {if $im} -->
+      <img src="http://mystatus.skype.com/smallclassic/{$im|escape:url}" alt="Skype" /><a href="skype:{$im|escape:url}?call">{$im}</a>
+      <!-- {/if} -->
+  <!-- {/foreach} --><br />
+  <!-- ICP 证书{if $icp_number} -->
+  {$lang.icp_number}:<a href="http://www.miibeian.gov.cn/" target="_blank">{$icp_number}</a><br />
+  <!-- 结束ICP 证书{/if} -->
+  {insert name='query_info'}<br />
+  {foreach from=$lang.p_y item=pv}{$pv}{/foreach}{$licensed}<br />
+    {if $stats_code}
+    <div align="left">{$stats_code}</div>
+    {/if}
+    <div align="left" id="rss"><a href="{$feed_url}"><img src="../images/xml_rss2.gif" alt="rss" /></a></div>
+ </div>
+</div>
+</textarea>
+<p>3,相关css</p>
+style.css 中
+<textarea name="" rows="" cols="">
+   /*版权*/
+   #footer{background:url(images/logo1.gif) no-repeat 5% 50%; padding-left:200px; width:760px; margin:10px auto;}
+   #footer .text{background:url(images/footerLine.gif) no-repeat left center; padding-left:50px; *padding-bottom:20px;}
+   #footer .text a{color:#404040; text-decoration:none;}
+</textarea>
+</div>
+</body>
+</html>
